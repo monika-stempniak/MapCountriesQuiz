@@ -5,7 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   devtool: 'cheap-eval-source-map',
   entry: {
-    main: path.join(__dirname, 'src/js', 'app.jsx')
+    main: path.join(__dirname, 'src/js', 'main.jsx')
   },
   output: {
     path: path.join(__dirname, 'dist'),
