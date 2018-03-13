@@ -63,3 +63,20 @@
     }
   }
 }
+
+// -----------------------
+// ----- TOPBAR TABLE ------
+// -----------------------
+
+.table-score {
+  width: 100%;
+  text-align: center;
+
+  .good {
+    color: $color-good;
+  }
+
+  .bad {
+    color: $color-bad;
+  }
+}
