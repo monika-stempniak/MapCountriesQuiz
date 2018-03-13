@@ -14,7 +14,15 @@
     .map-svg {
       width: 1009.12px;
       height: 665.24px;
+      transition: .5s;
 
+      .land {
+        transition: .3s;
+
+        &:hover {
+          fill: $color-hover;
+        }
+      }
     }
 
   }
