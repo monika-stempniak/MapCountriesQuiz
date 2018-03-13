@@ -1,0 +1,9 @@
+$color-main: #233e55;
+
+
+
+@mixin flexbox($justify-content, $align-items) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
