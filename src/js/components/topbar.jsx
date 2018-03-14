@@ -10,6 +10,9 @@ class Topbar extends React.Component {
       countryName: "",
       flag: "http://via.placeholder.com/150x80?text=COUNTRY+FLAG",
       capital: "",
+      answer: this.props.answer,
+      good: 0,
+      bad: 0,
     }
 }
   handleClickBtn() {
@@ -23,11 +26,23 @@ class Topbar extends React.Component {
         flag: countries[randomCountryNumber].flag,
         capital: countries[randomCountryNumber].capital
       })
+      console.log(this.state.countryName);
     })
-
   }
 
-  componentDidMount() {
+  componentWillReceiveProps(nextProps) {
+    console.log("componentWillReceiveProps");
+    if (nextProps.answer == this.state.countryCode) {
+      this.setState({
+        good: this.state.good + 1
+      })
+      this.handleClickBtn();
+    } else {
+      this.setState({
+        bad: this.state.bad + 1
+      })
+      this.handleClickBtn();
+    }
   }
 
   render() {
@@ -65,8 +80,8 @@ class Topbar extends React.Component {
                 <tr>
                   <td>00:00</td>
                   <td>1/256</td>
-                  <td className="good">0</td>
-                  <td className="bad">0</td>
+                  <td className="good">{this.state.good}</td>
+                  <td className="bad">{this.state.bad}</td>
                 </tr>
               </tbody>
             </table>
