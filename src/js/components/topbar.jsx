@@ -6,7 +6,7 @@ class Topbar extends React.Component {
     super(props);
 
     this.state = {
-      
+
     }
 }
 
@@ -32,9 +32,9 @@ class Topbar extends React.Component {
             <table className="table-score">
               <thead>
                 <tr>
-                  <th scope="col" rowspan="2">Timer</th>
-                  <th scope="col" rowspan="2">Nr of Countries</th>
-                  <th scope="col" colspan="2">Answers</th>
+                  <th scope="col" rowSpan="2">Timer</th>
+                  <th scope="col" rowSpan="2">Nr of Countries</th>
+                  <th scope="col" colSpan="2">Answers</th>
                 </tr>
                 <tr>
                   <th scope="col" className="good">Good</th>
