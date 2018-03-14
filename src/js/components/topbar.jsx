@@ -12,27 +12,33 @@ class Topbar extends React.Component {
       answer: this.props.answer,
       good: 0,
       bad: 0,
-      counter: 0
+      counter: 0,
     }
 }
   handleClickBtn() {
     const url = 'https://restcountries.eu/rest/v2/all';
     fetch(url).then( response => response.json() ).then( countries => {
-      console.log(countries);
-      const randomCountryNumber = Math.floor(Math.random() * countries.length);
+      // console.log(countries);
+      const excludedCountries = ["AQ", "UM"];
+      let randomNumber = Math.floor(Math.random() * 20);
+      excludedCountries.forEach( item => {
+        if (countries[randomNumber].alpha2Code == item) {
+          randomNumber = Math.floor(Math.random() * 20);
+        }
+      })
       this.setState({
-        countryName: countries[randomCountryNumber].name,
-        countryCode: countries[randomCountryNumber].alpha2Code,
-        flag: countries[randomCountryNumber].flag,
-        capital: countries[randomCountryNumber].capital,
-        counter: this.state.counter + 1
+        countryName: countries[randomNumber].name,
+        countryCode: countries[randomNumber].alpha2Code,
+        flag: countries[randomNumber].flag,
+        capital: countries[randomNumber].capital,
+        counter: this.state.counter + 1,
       })
       console.log(this.state.countryName);
     })
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("componentWillReceiveProps");
+    // console.log("componentWillReceiveProps");
     if (nextProps.answer == this.state.countryCode) {
       this.setState({
         good: this.state.good + 1
@@ -80,7 +86,7 @@ class Topbar extends React.Component {
               <tbody>
                 <tr>
                   <td>00:00</td>
-                  <td>{this.state.counter/20}</td>
+                  <td>{`${this.state.counter}/20`}</td>
                   <td className="good">{this.state.good}</td>
                   <td className="bad">{this.state.bad}</td>
                 </tr>
