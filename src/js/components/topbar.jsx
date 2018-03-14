@@ -12,6 +12,7 @@ class Topbar extends React.Component {
       answer: this.props.answer,
       good: 0,
       bad: 0,
+      counter: 0
     }
 }
   handleClickBtn() {
@@ -24,6 +25,7 @@ class Topbar extends React.Component {
         countryCode: countries[randomCountryNumber].alpha2Code,
         flag: countries[randomCountryNumber].flag,
         capital: countries[randomCountryNumber].capital,
+        counter: this.state.counter + 1
       })
       console.log(this.state.countryName);
     })
@@ -78,7 +80,7 @@ class Topbar extends React.Component {
               <tbody>
                 <tr>
                   <td>00:00</td>
-                  <td>1/256</td>
+                  <td>{this.state.counter/20}</td>
                   <td className="good">{this.state.good}</td>
                   <td className="bad">{this.state.bad}</td>
                 </tr>
