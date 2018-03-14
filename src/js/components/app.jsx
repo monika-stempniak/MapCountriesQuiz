@@ -28,7 +28,7 @@ class App extends React.Component {
    
     return (
       <div>
-        <Topbar answer={this.state.userAnswer} listId={ListId}/>
+        <Topbar answer={this.state.userAnswer} listId={listId}/>
         <Map clickMap={this.handleClick} countries={countries}/>
       </div>
     )
