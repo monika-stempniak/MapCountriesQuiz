@@ -21,11 +21,10 @@ class Topbar extends React.Component {
       // console.log(countries);
       const excludedCountries = ["AQ", "UM"];
       let randomNumber = Math.floor(Math.random() * 20);
-      excludedCountries.forEach( item => {
-        if (countries[randomNumber].alpha2Code == item) {
-          randomNumber = Math.floor(Math.random() * 20);
-        }
-      })
+      if (excludedCountries.indexOf(countries[randomNumber].alpha2Code) !== -1) {
+        randomNumber = Math.floor(Math.random() * 20);
+      }
+
       this.setState({
         countryName: countries[randomNumber].name,
         countryCode: countries[randomNumber].alpha2Code,
