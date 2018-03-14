@@ -17,6 +17,11 @@
       transition: .5s;
 
       .land {
+        fill: #CCCCCC;
+        fill-opacity: 1;
+        stroke: $color-main;
+        stroke-opacity: 1;
+        stroke-width:0.5;
         transition: .3s;
 
         &:hover {
