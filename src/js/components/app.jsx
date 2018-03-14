@@ -1,6 +1,7 @@
 import React from 'react';
 import { Map } from './map.jsx';
 import { Topbar } from './topbar.jsx';
+import { countries } from './countries.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -19,10 +20,16 @@ class App extends React.Component {
   }
 
   render() {
+
+    const listId = countries.map(elem => {
+      return elem.id
+    })
+    console.log(listId)
+   
     return (
       <div>
-        <Topbar answer={this.state.userAnswer}/>
-        <Map clickMap={this.handleClick}/>
+        <Topbar answer={this.state.userAnswer} listId={ListId}/>
+        <Map clickMap={this.handleClick} countries={countries}/>
       </div>
     )
   }

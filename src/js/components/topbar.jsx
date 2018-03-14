@@ -1,5 +1,4 @@
 import React from 'react';
-import { Map } from './map.jsx';
 
 class Topbar extends React.Component {
   constructor(props) {
@@ -24,7 +23,7 @@ class Topbar extends React.Component {
         countryName: countries[randomCountryNumber].name,
         countryCode: countries[randomCountryNumber].alpha2Code,
         flag: countries[randomCountryNumber].flag,
-        capital: countries[randomCountryNumber].capital
+        capital: countries[randomCountryNumber].capital,
       })
       console.log(this.state.countryName);
     })

@@ -1,19 +1,13 @@
 import React from 'react';
-import {countries} from './countries.js'
 
-class Path extends React.Component {
-  render() {
-    console.log(countries)
-    return  <div> </div>
-  }
-}
+
+
 class Map extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      mapSvgStyle: {transform: `scale(1) translateY(0px)`},
-      country: countries
+      mapSvgStyle: {transform: `scale(1) translateY(0px)`}
     }
 }
 
@@ -40,7 +34,7 @@ class Map extends React.Component {
 
   render() {
 
-    const list = countries.map( elem => {
+    const list = this.props.countries.map( elem => {
       return <path
       key={elem.id}
       id={elem.id}
