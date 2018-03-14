@@ -1,20 +1,3 @@
-render() {
-
-  const list = countries.map( elem => {
-    return <path
-    key={elem.id}
-    id={elem.id}
-    title={elem.title}
-    className="land"
-    onClick={e => this.handleClickInPath(elem.id)}
-    d={elem.d}/>
-
-  })
-
-
-  <g>
-             {list}
-
 export const countries = [
   {
     id:"AD",
