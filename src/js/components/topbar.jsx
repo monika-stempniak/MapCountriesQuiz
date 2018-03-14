@@ -6,9 +6,29 @@ class Topbar extends React.Component {
     super(props);
 
     this.state = {
-
+      countryCode: "",
+      countryName: "",
+      flag: "http://via.placeholder.com/150x80?text=COUNTRY+FLAG",
+      capital: "",
     }
 }
+  handleClickBtn() {
+    const url = 'https://restcountries.eu/rest/v2/all';
+    fetch(url).then( response => response.json() ).then( countries => {
+      console.log(countries);
+      const randomCountryNumber = Math.floor(Math.random() * countries.length);
+      this.setState({
+        countryName: countries[randomCountryNumber].name,
+        countryCode: countries[randomCountryNumber].alpha2Code,
+        flag: countries[randomCountryNumber].flag,
+        capital: countries[randomCountryNumber].capital
+      })
+    })
+
+  }
+
+  componentDidMount() {
+  }
 
   render() {
     return (
@@ -21,11 +41,11 @@ class Topbar extends React.Component {
             <div className="quiz-question">Which country the flag belongs to?</div>
             <div>
               <a className="quiz-hint" href="">Get a hint?</a>
-              <button className="quiz-btn" type="button">Start</button>
+              <button className="quiz-btn" type="button" onClick={() => this.handleClickBtn()}>Start</button>
             </div>
           </div>
           <div className="col-3">
-            <img className="flag" src="http://via.placeholder.com/150x80?text=COUNTRY+FLAG" alt="Country flag"/>
+            <img className="flag" src={this.state.flag} alt={`${this.state.countryName} flag`}/>
           </div>
           <div className="col-3">
 
