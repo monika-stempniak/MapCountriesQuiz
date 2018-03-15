@@ -12,8 +12,8 @@
     position: relative;
 
     .map-svg {
-      width: 1009.12px;
-      height: 665.24px;
+      width: $map-width;
+      height: $map-height;
       transition: .5s;
 
       .land {
@@ -32,8 +32,8 @@
 
     .btn-map {
       position: absolute;
-      top: 100px;
-      left: 20px;
+      top: $map-height / 2;
+      left: $map-width - 1000;
       z-index: 1;
       padding: 10px;
       border-radius: 50%;
@@ -44,7 +44,7 @@
     }
 
     .btn-further {
-      top: 60px;
+      top: $map-height / 2.3;
     }
 
     .country-name {
