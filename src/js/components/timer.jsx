@@ -14,8 +14,8 @@ class Timer extends React.Component {
     }
 
     tick = () => {
-      const timeToChangeMap = 1;
-      if(this.state.seconds == 10) {
+      const timeToChangeMap = 2;
+      if(this.state.minutes == timeToChangeMap) {
         this.setState({
           minutes: 0,
           seconds: 0,
