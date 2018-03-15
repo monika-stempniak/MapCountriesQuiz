@@ -17,11 +17,11 @@ class Topbar extends React.Component {
       isStartClicked: false,
       hintVisible: {display: 'none'},
       hintMessage: "",
-      reset: false
     }
-}
+  }
+
   handleClickBtn = () => {
-    if(this.state.reset != true) {
+    if(this.state.isStartClicked != true) {
       this.fetchData()
     }
 
@@ -48,13 +48,11 @@ class Topbar extends React.Component {
         hintVisible: {display: 'block'},
         hintMessage: `Capital: ${this.state.capital}`
       })
-      // console.log(this.state.countryName);
 
     })
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log("componentWillReceiveProps");
     if(this.state.isStartClicked) {
         if (nextProps.answer == this.state.countryCode) {
           this.setState({
@@ -71,12 +69,6 @@ class Topbar extends React.Component {
 
   handleClickHint() {
 
-  }
-
-  handleTimer = () => {
-    this.setState({
-      reset: true
-    })
   }
 
   render() {
@@ -113,7 +105,7 @@ class Topbar extends React.Component {
               </thead>
               <tbody>
                 <tr>
-                  <Timer getTimer={this.handleClickBtn} isStartClicked={this.state.isStartClicked}/>
+                  <Timer isStartClicked={this.state.isStartClicked}/>
                   <td>{`${this.state.counter}/20`}</td>
                   <td className="good">{this.state.good}</td>
                   <td className="bad">{this.state.bad}</td>
