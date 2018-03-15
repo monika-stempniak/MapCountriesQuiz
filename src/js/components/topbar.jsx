@@ -17,14 +17,14 @@ class Topbar extends React.Component {
       isStartClicked: false,
       hintVisible: {display: 'none'},
       hintMessage: "",
+      isTimeOut: false
     }
   }
 
   handleClickBtn = () => {
-    if(this.state.isStartClicked != true) {
-      this.fetchData()
+    if(this.state.isTimeOut != true) {
+      this.fetchData();
     }
-
   }
 
 
@@ -49,6 +49,7 @@ class Topbar extends React.Component {
         hintMessage: `Capital: ${this.state.capital}`
       })
 
+      console.log(this.state.countryName);
     })
   }
 
@@ -71,52 +72,73 @@ class Topbar extends React.Component {
 
   }
 
+  getTimer = (timeOut) => {
+    this.setState({
+      isTimeOut: timeOut
+    })
+  }
+
   render() {
-    return (
-      <section className="topbar">
-        <header className="topbar-header">
-          <h1 className="header-title">Map Countries Quiz</h1>
-        </header>
-        <div className="topbar-content">
-          <div className="col-3">
-            <div className="quiz-question">Which country the flag belongs to?</div>
-            <div>
-              <a className="quiz-hint" href="" style={this.state.hintVisible} onClick={() => this.handleClickHint()}>Get a hint?</a>
-              <button className="quiz-btn" type="button" onClick={() => this.handleClickBtn()}>Start</button>
-            </div>s
-            <div className="hint">hint</div>
-          </div>
-          <div className="col-3">
-            <img className="flag" src={this.state.flag} alt={`${this.state.countryName} flag`}/>
-          </div>
-          <div className="col-3">
 
-            <table className="table-score">
-              <thead>
-                <tr>
-                  <th scope="col" rowSpan="2">Timer</th>
-                  <th scope="col" rowSpan="2">Nr of Countries</th>
-                  <th scope="col" colSpan="2">Answers</th>
-                </tr>
-                <tr>
-                  <th scope="col" className="good">Good</th>
-                  <th scope="col" className="bad">Bad</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <Timer isStartClicked={this.state.isStartClicked}/>
-                  <td>{`${this.state.counter}/20`}</td>
-                  <td className="good">{this.state.good}</td>
-                  <td className="bad">{this.state.bad}</td>
-                </tr>
-              </tbody>
-            </table>
-
+    if (this.state.counter == 20 || this.state.isTimeOut == true) {
+      return (
+        <section className="topbar">
+          <header className="topbar-header">
+            <h1 className="header-title">Map Countries Quiz</h1>
+          </header>
+          <div className="the-end">
+            <h2>The end</h2>
+            <button>Play again</button>
           </div>
-        </div>
-      </section>
-    )
+        </section>
+      )
+    } else {
+          return (
+            <section className="topbar">
+              <header className="topbar-header">
+                <h1 className="header-title">Map Countries Quiz</h1>
+              </header>
+              <div className="topbar-content">
+                <div className="col-3">
+                  <div className="quiz-question">Which country the flag belongs to?</div>
+                  <div>
+                    <a className="quiz-hint" href="" style={this.state.hintVisible} onClick={() => this.handleClickHint()}>Get a hint?</a>
+                    <button className="quiz-btn" type="button" onClick={() => this.handleClickBtn()}>Start</button>
+                  </div>
+                  <div className="hint">hint</div>
+                </div>
+                <div className="col-3">
+                  <img className="flag" src={this.state.flag} alt={`${this.state.countryName} flag`}/>
+                </div>
+                <div className="col-3">
+      
+                  <table className="table-score">
+                    <thead>
+                      <tr>
+                        <th scope="col" rowSpan="2">Timer</th>
+                        <th scope="col" rowSpan="2">Nr of Countries</th>
+                        <th scope="col" colSpan="2">Answers</th>
+                      </tr>
+                      <tr>
+                        <th scope="col" className="good">Good</th>
+                        <th scope="col" className="bad">Bad</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <Timer isStartClicked={this.state.isStartClicked} getTime={this.getTimer}/>
+                        <td>{`${this.state.counter}/20`}</td>
+                        <td className="good">{this.state.good}</td>
+                        <td className="bad">{this.state.bad}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+      
+                </div>
+              </div>
+            </section>
+          )
+    }
   }
 }
 
