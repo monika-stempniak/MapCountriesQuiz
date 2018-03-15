@@ -9,3 +9,21 @@ $color-bad: #e34141;
   justify-content: $justify-content;
   align-items: $align-items;
 }
+
+%btn {
+  padding: 10px 40px;
+  border-radius: 10px;
+  border: none;
+  background-color: $color-hover;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  font-family: 'Black Ops One', cursive;
+  outline: none;
+  transition: .5s;
+}
+
+%btn-hover {
+  background-color: $color-main;
+  color:$color-bg;
+  cursor: pointer;
+}
