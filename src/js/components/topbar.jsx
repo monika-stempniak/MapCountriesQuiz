@@ -1,4 +1,5 @@
 import React from 'react';
+import { Header } from './header.jsx';
 import { Timer } from './timer.jsx';
 
 class Topbar extends React.Component {
@@ -116,9 +117,7 @@ class Topbar extends React.Component {
     if (this.state.counter == 20 || this.state.isTimeOut == true) {
       return (
         <section className="topbar">
-          <header className="topbar-header">
-            <h1 className="header-title">Map Countries Quiz</h1>
-          </header>
+          <Header />
           <div className="the-end" style={this.state.endDisplay}>
             <h2 className="the-end-title">The end</h2>
             <button className="btn btn-play" onClick={this.handleClickPlayAgain}>Play again</button>
@@ -128,9 +127,7 @@ class Topbar extends React.Component {
     } else {
         return (
           <section className="topbar">
-            <header className="topbar-header">
-              <h1 className="header-title">Map Countries Quiz</h1>
-            </header>
+            <Header />
             <div className="topbar-content" style={this.state.contentDisplay}>
               <div className="col-3">
                 <div className="quiz-question">Which country the flag belongs to?</div>
