@@ -13,7 +13,6 @@ class App extends React.Component {
   }
 
   handleClick = (answer) => {
-    console.log(answer)
     this.setState({
       userAnswer: answer
     })
@@ -24,8 +23,7 @@ class App extends React.Component {
     const listId = countries.map(elem => {
       return elem.id
     })
-    console.log(listId)
-   
+
     return (
       <div>
         <Topbar answer={this.state.userAnswer} listId={listId}/>

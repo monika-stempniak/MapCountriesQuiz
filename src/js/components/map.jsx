@@ -9,7 +9,7 @@ class Map extends React.Component {
       countryHover: {display: 'none'},
       countryId: ''
     }
-}
+  }
 
   handleClickCloser() {
     this.setState({
@@ -24,12 +24,10 @@ class Map extends React.Component {
   }
 
   handleMouseEnter(id) {
-    console.log("fgf",id)
     this.setState({
       countryHover: {display: 'block'},
-      countryId: id
+      countryId: id,
     })
-
   }
 
   handleMouseOut() {
@@ -40,7 +38,6 @@ class Map extends React.Component {
   }
 
   handleClickInPath(idCountry) {
-    console.log(idCountry);
     this.props.clickMap(idCountry);
   }
 
@@ -58,19 +55,15 @@ class Map extends React.Component {
       d={elem.d}/>;
     })
 
-    console.log("id",this.state.countryId);
-
     let country = [];
     country = this.props.countries.filter( elem => {
       return this.state.countryId === elem.id
     })
+
     let title = "";
     if(country.length > 0 ) {
       title = country[0].title
-
-      console.log(title);
     }
-
 
     return (
       <section className="map">
