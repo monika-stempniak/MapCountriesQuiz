@@ -13,7 +13,7 @@ class Map extends React.Component {
 
   handleClickCloser() {
     this.setState({
-      mapSvgStyle: {transform: `scale(1.2) translateY(-50px)`}
+      mapSvgStyle: {transform: `scale(${2}) translateY(-100px)`}
     })
   }
 
