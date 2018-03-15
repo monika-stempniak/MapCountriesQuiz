@@ -18,54 +18,69 @@
 
   .topbar-content {
     @include flexbox(center, center);
-    padding: 10px 30px;
+    padding: 5px 30px;
 
     .col-3 {
       flex: 1;
-
-      .quiz-question {
-        font-size: 1.3rem;
-      }
-
-      .quiz-btn {
-        padding: 10px 40px;
-        margin-left: 10px;
-        margin-top: 5px;
-        border-radius: 10px;
-        border: none;
-        background-color: $color-hover;
-        font-size: 1.3rem;
-        text-transform: uppercase;
-        font-family: 'Black Ops One', cursive;
-        outline: none;
-        transition: .5s;
-
-        &:hover {
-          background-color: $color-main;
-          color:$color-bg;
-          cursor: pointer;
-        }
-      }
-
-      .quiz-hint {
-        color: $color-main;
-        transition: .3s;
-
-        &:hover {
-          color: $color-hover;
-        }
-      }
 
       &:nth-of-type(2),
       &:last-of-type {
         @include flexbox(center, center);
       }
-
     }
 
+    .hint {
+      transition: .5s;
+    }
+  
+    .quiz-question {
+      font-size: 1.3rem;
+    }
+  
+    .quiz-row {
+      @include flexbox(flex-start, center);
+
+      .btn-start {
+        @extend %btn;
+
+        &:hover {
+          @extend %btn-hover;
+        }
+      }
+  
+      .quiz-hint {
+        color: $color-main;
+        padding: 10px 30px 10px 0;
+        transition: .3s;
+  
+        &:hover {
+          color: $color-hover;
+        }
+      }
+    }
+  
     .flag {
       width: 150px;
       height: 80px;
+    }
+  }
+
+  .the-end {
+    text-align: center;
+
+    .the-end-title {
+      font-size: 2.3rem;
+      text-transform: capitalize;
+      letter-spacing: 2px;
+    }
+
+    .btn-play {
+      @extend %btn;
+      margin-bottom: 10px;
+
+      &:hover {
+        @extend %btn-hover;
+      }
     }
   }
 }
