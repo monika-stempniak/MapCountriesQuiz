@@ -15,6 +15,7 @@ class Topbar extends React.Component {
       bad: 0,
       counter: 0,
       isStartClicked: false,
+      hintLinkVisible: {display: 'none'},
       hintVisible: {display: 'none'},
       hintMessage: "",
       isTimeOut: false,
@@ -46,8 +47,11 @@ class Topbar extends React.Component {
         capital: countries[randomNumber].capital,
         counter: this.state.counter + 1,
         isStartClicked: true,
-        hintVisible: {display: 'block'},
-        hintMessage: `Capital: ${this.state.capital}`
+        hintLinkVisible: {display: 'block'},
+      }, () => {
+        this.setState({
+          hintMessage: `Capital: ${this.state.capital}`
+        })
       })
 
       console.log(this.state.countryName);
@@ -69,8 +73,14 @@ class Topbar extends React.Component {
     }
   }
 
-  handleClickHint() {
-
+  handleClickHint = (e) => {
+    e.preventDefault();
+    this.hintTimer = setTimeout(() => {
+      this.setState({
+        hintVisible: {display: 'block'},
+      });
+      clearTimeout(this.hintTimer);
+    }, 1000)
   }
 
   getTimer = (timeOut) => {
@@ -90,6 +100,7 @@ class Topbar extends React.Component {
       bad: 0,
       counter: 0,
       isStartClicked: false,
+      hintLinkVisible: {display: 'none'},
       hintVisible: {display: 'none'},
       hintMessage: "",
       isTimeOut: false,
@@ -113,51 +124,51 @@ class Topbar extends React.Component {
         </section>
       )
     } else {
-          return (
-            <section className="topbar">
-              <header className="topbar-header">
-                <h1 className="header-title">Map Countries Quiz</h1>
-              </header>
-              <div className="topbar-content" style={this.state.contentDisplay}>
-                <div className="col-3">
-                  <div className="quiz-question">Which country the flag belongs to?</div>
-                  <div>
-                    <a className="quiz-hint" href="" style={this.state.hintVisible} onClick={() => this.handleClickHint()}>Get a hint?</a>
-                    <button className="quiz-btn" type="button" onClick={() => this.handleClickBtn()}>Start</button>
-                  </div>
-                  <div className="hint">hint</div>
+        return (
+          <section className="topbar">
+            <header className="topbar-header">
+              <h1 className="header-title">Map Countries Quiz</h1>
+            </header>
+            <div className="topbar-content" style={this.state.contentDisplay}>
+              <div className="col-3">
+                <div className="quiz-question">Which country the flag belongs to?</div>
+                <div>
+                  <a className="quiz-hint" href="" style={this.state.hintLinkVisible} onClick={this.handleClickHint}>Get a hint?</a>
+                  <button className="quiz-btn" type="button" onClick={() => this.handleClickBtn()}>Start</button>
                 </div>
-                <div className="col-3">
-                  <img className="flag" src={this.state.flag} alt={`${this.state.countryName} flag`}/>
-                </div>
-                <div className="col-3">
-      
-                  <table className="table-score">
-                    <thead>
-                      <tr>
-                        <th scope="col" rowSpan="2">Timer</th>
-                        <th scope="col" rowSpan="2">Nr of Countries</th>
-                        <th scope="col" colSpan="2">Answers</th>
-                      </tr>
-                      <tr>
-                        <th scope="col" className="good">Good</th>
-                        <th scope="col" className="bad">Bad</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <Timer isStartClicked={this.state.isStartClicked} getTime={this.getTimer}/>
-                        <td>{`${this.state.counter}/20`}</td>
-                        <td className="good">{this.state.good}</td>
-                        <td className="bad">{this.state.bad}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-      
-                </div>
+                <div className="hint" style={this.state.hintVisible}>{this.state.hintMessage}</div>
               </div>
-            </section>
-          )
+              <div className="col-3">
+                <img className="flag" src={this.state.flag} alt={`${this.state.countryName} flag`}/>
+              </div>
+              <div className="col-3">
+
+                <table className="table-score">
+                  <thead>
+                    <tr>
+                      <th scope="col" rowSpan="2">Timer</th>
+                      <th scope="col" rowSpan="2">Nr of Countries</th>
+                      <th scope="col" colSpan="2">Answers</th>
+                    </tr>
+                    <tr>
+                      <th scope="col" className="good">Good</th>
+                      <th scope="col" className="bad">Bad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <Timer isStartClicked={this.state.isStartClicked} getTime={this.getTimer}/>
+                      <td>{`${this.state.counter}/20`}</td>
+                      <td className="good">{this.state.good}</td>
+                      <td className="bad">{this.state.bad}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </section>
+        )
     }
   }
 }
