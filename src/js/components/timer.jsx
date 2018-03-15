@@ -6,7 +6,7 @@ class Timer extends React.Component {
       this.state = {
         minutes: 0,
         seconds: 0,
-        oneTimer: false
+        oneTimer: false,
       }
     }
     componentWillUnmount () {
@@ -18,9 +18,10 @@ class Timer extends React.Component {
       if(this.state.seconds == 10) {
         this.setState({
           minutes: 0,
-          seconds: 0
+          seconds: 0,
         })
-        clearInterval(this.timer)
+        clearInterval(this.timer);
+        this.props.getTime(true);
       }
       else {
         this.setState({
