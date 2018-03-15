@@ -13,6 +13,7 @@ class Topbar extends React.Component {
       good: 0,
       bad: 0,
       counter: 0,
+      isStartClicked: false
     }
 }
   handleClickBtn() {
@@ -31,6 +32,7 @@ class Topbar extends React.Component {
         flag: countries[randomNumber].flag,
         capital: countries[randomNumber].capital,
         counter: this.state.counter + 1,
+        isStartClicked: true
       })
       console.log(this.state.countryName);
     })
@@ -38,16 +40,17 @@ class Topbar extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     // console.log("componentWillReceiveProps");
-    if (nextProps.answer == this.state.countryCode) {
-      this.setState({
-        good: this.state.good + 1
-      })
-      this.handleClickBtn();
-    } else {
-      this.setState({
-        bad: this.state.bad + 1
-      })
-      this.handleClickBtn();
+    if(this.state.isStartClicked) {
+        if (nextProps.answer == this.state.countryCode) {
+          this.setState({
+            good: this.state.good + 1
+          })
+        } else {
+          this.setState({
+            bad: this.state.bad + 1
+          })
+        }
+       this.handleClickBtn();
     }
   }
 
