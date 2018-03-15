@@ -15,8 +15,8 @@ class Topbar extends React.Component {
       bad: 0,
       counter: 0,
       isStartClicked: false,
-      hintLinkVisible: {display: 'none'},
-      hintVisible: {display: 'none'},
+      hintLinkVisible: {visibility: 'hidden'},
+      hintVisible: {visibility: 'hidden'},
       hintMessage: "",
       isTimeOut: false,
       endDisplay: {display: 'block'},
@@ -47,7 +47,7 @@ class Topbar extends React.Component {
         capital: countries[randomNumber].capital,
         counter: this.state.counter + 1,
         isStartClicked: true,
-        hintLinkVisible: {display: 'block'},
+        hintLinkVisible: {visibility: 'visible'},
       }, () => {
         this.setState({
           hintMessage: `Capital: ${this.state.capital}`
@@ -75,11 +75,13 @@ class Topbar extends React.Component {
 
   handleClickHint = (e) => {
     e.preventDefault();
+    this.setState({
+      hintVisible: {visibility: 'visible'},
+    });
     this.hintTimer = setTimeout(() => {
       this.setState({
-        hintVisible: {display: 'block'},
+        hintVisible: {visibility: 'hidden'},
       });
-      clearTimeout(this.hintTimer);
     }, 1000)
   }
 
@@ -100,8 +102,8 @@ class Topbar extends React.Component {
       bad: 0,
       counter: 0,
       isStartClicked: false,
-      hintLinkVisible: {display: 'none'},
-      hintVisible: {display: 'none'},
+      hintLinkVisible: {visibility: 'hidden'},
+      hintVisible: {visibility: 'hidden'},
       hintMessage: "",
       isTimeOut: false,
       endDisplay: {display: 'block'},
@@ -118,8 +120,8 @@ class Topbar extends React.Component {
             <h1 className="header-title">Map Countries Quiz</h1>
           </header>
           <div className="the-end" style={this.state.endDisplay}>
-            <h2>The end</h2>
-            <button onClick={this.handleClickPlayAgain}>Play again</button>
+            <h2 className="the-end-title">The end</h2>
+            <button className="btn btn-play" onClick={this.handleClickPlayAgain}>Play again</button>
           </div>
         </section>
       )
@@ -132,9 +134,9 @@ class Topbar extends React.Component {
             <div className="topbar-content" style={this.state.contentDisplay}>
               <div className="col-3">
                 <div className="quiz-question">Which country the flag belongs to?</div>
-                <div>
+                <div className="quiz-row">
                   <a className="quiz-hint" href="" style={this.state.hintLinkVisible} onClick={this.handleClickHint}>Get a hint?</a>
-                  <button className="quiz-btn" type="button" onClick={() => this.handleClickBtn()}>Start</button>
+                  <button className="btn btn-start" type="button" onClick={() => this.handleClickBtn()}>Start</button>
                 </div>
                 <div className="hint" style={this.state.hintVisible}>{this.state.hintMessage}</div>
               </div>
