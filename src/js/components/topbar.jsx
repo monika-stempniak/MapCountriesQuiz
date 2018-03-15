@@ -17,7 +17,8 @@ class Topbar extends React.Component {
       isStartClicked: false,
       hintVisible: {display: 'none'},
       hintMessage: "",
-      isTimeOut: false
+      isTimeOut: false,
+      endDisplay: {display: 'block'},
     }
   }
 
@@ -78,6 +79,25 @@ class Topbar extends React.Component {
     })
   }
 
+  handleClickPlayAgain = () => {
+    this.setState({
+      countryCode: "",
+      countryName: "",
+      flag: "http://via.placeholder.com/150x80?text=COUNTRY+FLAG",
+      capital: "",
+      answer: this.props.answer,
+      good: 0,
+      bad: 0,
+      counter: 0,
+      isStartClicked: false,
+      hintVisible: {display: 'none'},
+      hintMessage: "",
+      isTimeOut: false,
+      endDisplay: {display: 'block'},
+    })
+
+  }
+
   render() {
 
     if (this.state.counter == 20 || this.state.isTimeOut == true) {
@@ -86,9 +106,9 @@ class Topbar extends React.Component {
           <header className="topbar-header">
             <h1 className="header-title">Map Countries Quiz</h1>
           </header>
-          <div className="the-end">
+          <div className="the-end" style={this.state.endDisplay}>
             <h2>The end</h2>
-            <button>Play again</button>
+            <button onClick={this.handleClickPlayAgain}>Play again</button>
           </div>
         </section>
       )
@@ -98,7 +118,7 @@ class Topbar extends React.Component {
               <header className="topbar-header">
                 <h1 className="header-title">Map Countries Quiz</h1>
               </header>
-              <div className="topbar-content">
+              <div className="topbar-content" style={this.state.contentDisplay}>
                 <div className="col-3">
                   <div className="quiz-question">Which country the flag belongs to?</div>
                   <div>
