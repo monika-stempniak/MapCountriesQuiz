@@ -68,8 +68,8 @@ class Map extends React.Component {
     return (
       <section className="map">
         <figure className="map-container">
-          <button className="btn btn-further" aria-hidden="true" onClick={() => this.handleClickFurther()}><i className="fas fa-minus"></i></button>
-          <button className="btn btn-closer" aria-hidden="true" onClick={() => this.handleClickCloser()}><i className="fas fa-plus"></i></button>
+          <button className="btn-map btn-further" aria-hidden="true" onClick={() => this.handleClickFurther()}><i className="fas fa-minus"></i></button>
+          <button className="btn-map btn-closer" aria-hidden="true" onClick={() => this.handleClickCloser()}><i className="fas fa-plus"></i></button>
           <div className="country-name" style={this.state.countryHover}>{title}</div>
           <h2 className="map-title visuallyhidden">World map</h2>
           <svg xmlns="http://www.w3.org/2000/svg" className="map-svg" viewBox="0 0 1009.12 665.24" style={this.state.mapSvgStyle}>
