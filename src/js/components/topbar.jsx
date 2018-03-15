@@ -1,4 +1,5 @@
 import React from 'react';
+import { Timer } from './timer.jsx';
 
 class Topbar extends React.Component {
   constructor(props) {
@@ -13,10 +14,21 @@ class Topbar extends React.Component {
       good: 0,
       bad: 0,
       counter: 0,
-      isStartClicked: false
+      isStartClicked: false,
+      hintVisible: {display: 'none'},
+      hintMessage: "",
+      reset: false
     }
 }
-  handleClickBtn() {
+  handleClickBtn = () => {
+    if(this.state.reset != true) {
+      this.fetchData()
+    }
+
+  }
+
+
+  fetchData = () => {
     const url = 'https://restcountries.eu/rest/v2/all';
     fetch(url).then( response => response.json() ).then( countries => {
       // console.log(countries);
@@ -32,9 +44,12 @@ class Topbar extends React.Component {
         flag: countries[randomNumber].flag,
         capital: countries[randomNumber].capital,
         counter: this.state.counter + 1,
-        isStartClicked: true
+        isStartClicked: true,
+        hintVisible: {display: 'block'},
+        hintMessage: `Capital: ${this.state.capital}`
       })
-      console.log(this.state.countryName);
+      // console.log(this.state.countryName);
+
     })
   }
 
@@ -54,6 +69,16 @@ class Topbar extends React.Component {
     }
   }
 
+  handleClickHint() {
+
+  }
+
+  handleTimer = () => {
+    this.setState({
+      reset: true
+    })
+  }
+
   render() {
     return (
       <section className="topbar">
@@ -64,9 +89,10 @@ class Topbar extends React.Component {
           <div className="col-3">
             <div className="quiz-question">Which country the flag belongs to?</div>
             <div>
-              <a className="quiz-hint" href="">Get a hint?</a>
+              <a className="quiz-hint" href="" style={this.state.hintVisible} onClick={() => this.handleClickHint()}>Get a hint?</a>
               <button className="quiz-btn" type="button" onClick={() => this.handleClickBtn()}>Start</button>
-            </div>
+            </div>s
+            <div className="hint">hint</div>
           </div>
           <div className="col-3">
             <img className="flag" src={this.state.flag} alt={`${this.state.countryName} flag`}/>
@@ -87,7 +113,7 @@ class Topbar extends React.Component {
               </thead>
               <tbody>
                 <tr>
-                  <td>00:00</td>
+                  <Timer getTimer={this.handleClickBtn} isStartClicked={this.state.isStartClicked}/>
                   <td>{`${this.state.counter}/20`}</td>
                   <td className="good">{this.state.good}</td>
                   <td className="bad">{this.state.bad}</td>
