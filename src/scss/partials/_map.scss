@@ -46,6 +46,18 @@
     .btn-further {
       top: 60px;
     }
+
+    .country-name {
+      background: rgba(255,255,255,0.8);
+      padding: 10px;
+      font-size: 1.2rem;
+      overflow: visible;
+      position: fixed;
+      top: 200px;
+      left: 200px;
+      border-radius: 10px;
+      z-index: 3;
+    }
   }
 }
 
