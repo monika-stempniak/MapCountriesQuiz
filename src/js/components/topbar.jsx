@@ -36,9 +36,9 @@ class Topbar extends React.Component {
     fetch(url).then( response => response.json() ).then( countries => {
       // console.log(countries);
       const excludedCountries = ["AQ", "UM"];
-      let randomNumber = Math.floor(Math.random() * 20);
+      let randomNumber = Math.floor(Math.random() * countries.length);
       if (excludedCountries.indexOf(countries[randomNumber].alpha2Code) !== -1) {
-        randomNumber = Math.floor(Math.random() * 20);
+        randomNumber = Math.floor(Math.random() * countries.length);
       }
 
       this.setState({
