@@ -25,7 +25,7 @@ class Topbar extends React.Component {
   }
 
   handleClickBtn = () => {
-    if(this.state.isTimeOut != true) {
+    if(this.state.isTimeOut != true && this.state.counter <= 20) {
       this.fetchData();
     }
   }
@@ -114,7 +114,7 @@ class Topbar extends React.Component {
 
   render() {
 
-    if (this.state.counter == 20 || this.state.isTimeOut == true) {
+    if (this.state.counter >= 21 || this.state.isTimeOut == true) {
       return (
         <section className="topbar">
           <Header />
