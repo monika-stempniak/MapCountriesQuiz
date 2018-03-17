@@ -1,5 +1,5 @@
 # MapCountriesQuiz
-Guess the country based on its flag got from an external API - ReactJS project
+Guess the country based on its flag obtained from an external API - ReactJS project
 
 Technologies:
 * ```JavaScript```, ```ES6```, ```React```
@@ -8,5 +8,5 @@ Technologies:
 * ```Webpack```, ```npm```, ```yarn```
 * no ```RWD```, only for large devices and extra large devices
 
-See project here:
+See the project here:
 https://monika-stempniak.github.io/MapCountriesQuiz/
