@@ -1,55 +1,39 @@
-var path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
 
 module.exports = {
+  mode: 'production',
   devtool: 'cheap-eval-source-map',
   entry: {
-    main: path.join(__dirname, 'src/js', 'main.jsx')
+    main: path.join(__dirname, 'src/js', 'main.jsx'),
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
   },
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 9000
+    port: 3333,
   },
   module: {
     rules: [
       {
         test: /\.jsx$/,
+        use: ['babel-loader', 'eslint-loader'],
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['es2015', 'stage-2', 'react']
-          }
-        }
       },
       {
         test: /\.(png|jpe?g|svg|gif|woff|otf)$/,
-        use: {loader: 'file-loader'}
+        use: { loader: 'file-loader' },
       },
       {
         test: /\.css/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-         fallback: "style-loader",
-         use: ['css-loader', 'sass-loader']
-       })
-     }
-    ]
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+    ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'index.html'),
-      hash: true
-    }),
-    new ExtractTextPlugin('style.css')
-  ]
 }
