@@ -49,7 +49,6 @@
 
     .country-name {
       background: rgba(255,255,255,0.8);
-      padding: 10px;
       font-size: 1.2rem;
       overflow: visible;
       position: fixed;
@@ -57,7 +56,10 @@
       left: 200px;
       border-radius: 10px;
       z-index: 3;
+
+      &.isHovered {
+        padding: 10px;
+      }
     }
   }
 }
-
