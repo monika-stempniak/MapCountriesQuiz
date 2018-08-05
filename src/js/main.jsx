@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { App } from './components/app.jsx';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { App } from './components/app.jsx'
 
-require('../scss/style.scss');
+require('../scss/style.scss')
 
 ReactDOM.render(
-    <App />,
-    document.getElementById('app')
-);
+  <App />,
+  document.getElementById('app')
+)

@@ -1,20 +1,20 @@
-import React from 'react';
-import { Map } from './map.jsx';
-import { Topbar } from './topbar.jsx';
+import React from 'react'
+import { Map } from './map.jsx'
+import { Topbar } from './topbar.jsx'
 import { countries } from './countries.js'
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state={
-      userAnswer: ""
+      userAnswer: '',
     }
   }
 
   handleClick = (answer) => {
     this.setState({
-      userAnswer: answer
+      userAnswer: answer,
     })
   }
 
@@ -33,5 +33,5 @@ class App extends React.Component {
   }
 }
 
-export { App };
+export { App }
 

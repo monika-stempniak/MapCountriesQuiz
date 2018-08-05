@@ -1,46 +1,46 @@
-import React from 'react';
+import React from 'react'
 
 class Timer extends React.Component {
-    constructor (props) {
-      super(props)
-      this.state = {
-        minutes: 0,
-        seconds: 0,
-        oneTimer: false,
-      }
+  constructor (props) {
+    super(props)
+    this.state = {
+      minutes: 0,
+      seconds: 0,
+      oneTimer: false,
     }
-    componentWillUnmount () {
-      clearInterval(this.timer)
-    }
+  }
+  componentWillUnmount () {
+    clearInterval(this.timer)
+  }
 
     tick = () => {
-      const timeToChangeMap = 2;
+      const timeToChangeMap = 2
       if(this.state.minutes == timeToChangeMap) {
         this.setState({
           minutes: 0,
           seconds: 0,
         })
-        clearInterval(this.timer);
-        this.props.getTime(true);
+        clearInterval(this.timer)
+        this.props.getTime(true)
       }
       else {
         this.setState({
-          seconds: this.state.seconds + 1
+          seconds: this.state.seconds + 1,
         })
         if (this.state.seconds > 59) {
           this.setState({
             minutes: this.state.minutes + 1,
-            seconds: 0
+            seconds: 0,
           })
         }
       }
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
       if( this.state.oneTimer === false && nextProps.isStartClicked === true) {
         this.timer = setInterval(this.tick, 1000)
         this.setState({
-          oneTimer: true
+          oneTimer: true,
         })
       }
     }
@@ -53,6 +53,6 @@ class Timer extends React.Component {
         </td>
       )
     }
-  }
+}
 
-export {Timer}
+export { Timer }

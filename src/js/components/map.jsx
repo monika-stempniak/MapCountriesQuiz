@@ -1,66 +1,66 @@
-import React from 'react';
+import React from 'react'
 
 class Map extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
-      mapSvgStyle: {transform: `scale(1) translateY(0px)`},
-      countryHover: {display: 'none'},
-      countryId: ''
+      mapSvgStyle: { transform: 'scale(1) translateY(0px)' },
+      countryHover: { display: 'none' },
+      countryId: '',
     }
   }
 
   handleClickCloser() {
     this.setState({
-      mapSvgStyle: {transform: `scale(${2}) translateY(-100px)`}
+      mapSvgStyle: { transform: `scale(${2}) translateY(-100px)` },
     })
   }
 
   handleClickFurther() {
     this.setState({
-      mapSvgStyle: {transform: `scale(1) translateY(0px)`}
+      mapSvgStyle: { transform: 'scale(1) translateY(0px)' },
     })
   }
 
   handleMouseEnter(id) {
     this.setState({
-      countryHover: {display: 'block'},
+      countryHover: { display: 'block' },
       countryId: id,
     })
   }
 
   handleMouseOut() {
     this.setState({
-      countryHover: {display: 'none'},
-      countryId: ''
+      countryHover: { display: 'none' },
+      countryId: '',
     })
   }
 
   handleClickInPath(idCountry) {
-    this.props.clickMap(idCountry);
+    this.props.clickMap(idCountry)
   }
 
   render() {
 
     const list = this.props.countries.map( elem => {
       return <path
-      key={elem.id}
-      id={elem.id}
-      title={elem.title}
-      className="land"
-      onClick={e => this.handleClickInPath(elem.id)}
-      onMouseEnter={(e) => this.handleMouseEnter(elem.id)}
-      onMouseOut={() => this.handleMouseOut()}
-      d={elem.d}/>;
+        key={elem.id}
+        id={elem.id}
+        title={elem.title}
+        className="land"
+        onClick={() => this.handleClickInPath(elem.id)}
+        onMouseEnter={() => this.handleMouseEnter(elem.id)}
+        onMouseOut={() => this.handleMouseOut()}
+        d={elem.d}/>
     })
 
-    let country = [];
+    let country = []
     country = this.props.countries.filter( elem => {
       return this.state.countryId === elem.id
     })
 
-    let title = "";
+    let title = ''
     if(country.length > 0 ) {
       title = country[0].title
     }
@@ -83,5 +83,5 @@ class Map extends React.Component {
   }
 }
 
-export { Map };
+export { Map }
 
