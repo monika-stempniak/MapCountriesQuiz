@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   mode: 'production',
@@ -13,8 +13,9 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 3333,
+    port: 9000,
   },
+  resolve: {extensions: ['.js','.jsx']},
   module: {
     rules: [
       {
@@ -36,4 +37,4 @@ module.exports = {
       },
     ],
   },
-}
+};

@@ -38,12 +38,16 @@
           @extend %btn-hover;
         }
       }
-  
-      .quiz-hint {
+
+      .btn-quiz-hint {
         color: $color-main;
         padding: 10px 30px 10px 0;
+        border: none;
+        background-color: transparent;
+        font-family: 'Black Ops One', cursive;
+        outline: none;
         transition: .3s;
-  
+
         &:hover {
           color: $color-hover;
         }

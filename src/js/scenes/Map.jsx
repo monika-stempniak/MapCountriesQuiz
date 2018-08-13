@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
-import { Button } from '../components/Button.jsx'
-import { Icon } from '../components/Icon.jsx'
-import { MapSVG } from '../components/MapSVG.jsx'
+import Button from '../components/Button'
+import Icon from '../components/Icon'
+import MapSVG from '../components/MapSVG'
 
 type Country = {id: string, title: string, d: string}
 
@@ -50,27 +50,42 @@ class Map extends React.Component<Props,State> {
     })
   }
 
-  handleClickInPath = (countryId: string) => {
-    this.props.clickMap(countryId)
+  handleBlur = () => {
+    this.setState({
+      countryNameDisplay: { display: 'none' },
+      countryId: '',
+    })
   }
-  // prepareSVGPathList = (): Array<>     co zwraca?
+
+  handleClickInPath = (countryId: string) => {
+    const {clickMap} = this.props
+    clickMap(countryId)
+  }
+
   prepareSVGPathList = (): Array<React$Element<any>> => {
-    const list = this.props.countries.map(elem => {
-      return <path
-        key={elem.id}
-        id={elem.id}
-        title={elem.title}
-        className="land"
-        onClick={() => this.handleClickInPath(elem.id)}
-        onMouseEnter={() => this.handleMouseEnter(elem.id)}
-        onMouseOut={this.handleMouseOut}
-        d={elem.d}/>
+    const {countries} = this.props
+    const list = countries.map(elem => {
+      return (
+        <path
+          key={elem.id}
+          id={elem.id}
+          title={elem.title}
+          className="land"
+          onClick={() => this.handleClickInPath(elem.id)}
+          onMouseEnter={() => this.handleMouseEnter(elem.id)}
+          onMouseOut={this.handleMouseOut}
+          onBlur={this.handleBlur}
+          d={elem.d}
+        />
+      )
     })
     return list
   }
 
   prepareCountryTitle = (): string => {
-    const country = this.props.countries.filter(elem => this.state.countryId === elem.id)
+    const {countries} = this.props
+    const {countryId} = this.state
+    const country = countries.filter(elem => countryId === elem.id)
     let title = ''
     title = country.length > 0 ? country[0].title : ''
     return title
@@ -84,7 +99,9 @@ class Map extends React.Component<Props,State> {
     return (
       <section className="map">
         <figure className="map-container">
-          <h2 className="map-title visuallyhidden">World map</h2>
+          <h2 className="map-title visuallyhidden">
+            World map
+          </h2>
           <div
             className={`country-name ${titleClass}`}
             style={countryNameDisplay}
@@ -97,14 +114,14 @@ class Map extends React.Component<Props,State> {
           />
           <Button
             btnClass="btn-map btn-further"
-            isHidden={true}
+            isHidden
             handleClick={this.handleClickFurther}
           >
             <Icon sign="minus" />
           </Button>
           <Button
             btnClass="btn-map btn-closer"
-            isHidden={true}
+            isHidden
             handleClick={this.handleClickCloser}
           >
             <Icon sign="plus" />
@@ -115,5 +132,4 @@ class Map extends React.Component<Props,State> {
   }
 }
 
-export { Map }
-
+export default Map

@@ -1,6 +1,5 @@
 {
   "presets": ["env", "react", "stage-2", "flow"],
-  "plugins": ["transform-class-properties"],
   "retainLines": true,
   "env": {
     "production": {

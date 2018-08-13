@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react'
-import { Map } from './Map.jsx'
-import { Topbar }  from './Topbar.jsx'
-import { countries } from '../auxiliaryArrays/countries.js'
+import Map from './Map'
+import Topbar  from './Topbar'
+import countries from '../auxiliaryArrays/countries'
 
 type State = {
   userAnswer: string,
@@ -10,7 +10,7 @@ type State = {
 
 type Props = {}
 
-type Country = {id:string, title: string, d: string}
+// type Country = {id: string, title: string, d: string}
 
 class App extends React.Component<Props, State> {
   state = {
@@ -28,16 +28,18 @@ class App extends React.Component<Props, State> {
   // }
 
   render() {
+    const {userAnswer} = this.state
+
     return (
       <div>
         <Topbar
-          answer={this.state.userAnswer}
+          answer={userAnswer}
           // listId={this.prepareListOfCountriesId(countries)}
         />
-        <Map clickMap={this.handleClick} countries={countries}/>
+        <Map clickMap={this.handleClick} countries={countries} />
       </div>
     )
   }
 }
 
-export { App }
+export default App

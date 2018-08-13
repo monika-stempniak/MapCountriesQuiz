@@ -7,11 +7,14 @@ type Props = {
 }
 
 function Header(props: Props) {
+  const {section, children} = props
   return (
-    <header className={`${props.section}-header`}>
-      <h1 className="header-title">{props.children}</h1>
+    <header className={`${section}-header`}>
+      <h1 className="header-title">
+        {children}
+      </h1>
     </header>
   )
 }
 
-export { Header }
+export default Header

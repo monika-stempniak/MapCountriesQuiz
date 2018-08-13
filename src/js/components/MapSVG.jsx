@@ -23,4 +23,4 @@ function MapSVG(props: Props) {
   )
 }
 
-export { MapSVG }
+export default MapSVG

@@ -6,7 +6,8 @@ type Props = {
 }
 
 function Icon(props: Props) {
-  return <i className={`fas fa-${props.sign}`}/>
+  const {sign} = props
+  return <i className={`fas fa-${sign}`} />
 }
 
-export { Icon }
+export default Icon

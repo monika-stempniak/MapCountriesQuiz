@@ -10,7 +10,6 @@ type State = {
 
 type Props = {
   getTime: (timeOut: boolean) => void,
-  isStartClicked: boolean,
 }
 
 class Timer extends React.Component<Props, State> {
@@ -21,23 +20,31 @@ class Timer extends React.Component<Props, State> {
     intervalId: setInterval(() => {})
   }
 
+  componentWillUnmount () {
+    const {intervalId} = this.state
+    clearInterval(intervalId)
+  }
+
   tick = () => {
+    const {seconds, minutes, intervalId} = this.state
+    const {getTime} = this.props
+
     const timeToChangeMap = 2
-    if (this.state.minutes === timeToChangeMap) {
+    if (minutes === timeToChangeMap) {
       this.setState({
         minutes: 0,
         seconds: 0,
       })
-      clearInterval(this.state.intervalId)
-      this.props.getTime(true)
+      clearInterval(intervalId)
+      getTime(true)
     }
     else {
       this.setState({
-        seconds: this.state.seconds + 1,
+        seconds: seconds + 1,
       })
-      if (this.state.seconds > 59) {
+      if (seconds > 59) {
         this.setState({
-          minutes: this.state.minutes + 1,
+          minutes: minutes + 1,
           seconds: 0,
         })
       }
@@ -45,7 +52,8 @@ class Timer extends React.Component<Props, State> {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    if (this.state.oneTimer === false && nextProps.isStartClicked === true) {
+    const {oneTimer} = this.state
+    if (oneTimer === false && nextProps.isStartClicked === true) {
       this.setState({
         intervalId: setInterval(this.tick, 1000),
         oneTimer: true,
@@ -53,16 +61,16 @@ class Timer extends React.Component<Props, State> {
     }
   }
 
-  componentWillUnmount () {
-    clearInterval(this.state.intervalId)
-  }
-
   render () {
     const { seconds, minutes } = this.state
     const displaySeconds = seconds < 10 ? `0${seconds}` : seconds
 
-    return <span>{`0${minutes}:${displaySeconds}`}</span>
+    return (
+      <span>
+        {`0${minutes}:${displaySeconds}`}
+      </span>
+    )
   }
 }
 
-export { Timer }
+export default Timer

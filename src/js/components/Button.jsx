@@ -2,29 +2,31 @@
 import * as React from 'react'
 
 type Props = {
-  btnType?: string,
   btnClass: string,
-  isHidden?: boolean,
+  isHidden: boolean,
   handleClick: () => void,
   children: React.Node
 }
 
 const Button = (props: Props) => {
+
   const {
-    btnType = 'button',
     btnClass,
     isHidden = false,
-    handleClick
+    handleClick,
+    children,
   } = props
 
-  return <button
-    type={btnType}
-    className={btnClass}
-    aria-hidden={isHidden}
-    onClick={handleClick}
-  >
-    {props.children}
-  </button>
+  return (
+    <button
+      type='button'
+      className={btnClass}
+      aria-hidden={isHidden}
+      onClick={handleClick}
+    >
+      {children}
+    </button>
+  )
 }
 
-export { Button }
+export default Button
