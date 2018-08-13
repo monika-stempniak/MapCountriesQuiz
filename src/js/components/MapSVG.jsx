@@ -1,14 +1,20 @@
-import React from 'react'
+// @flow
+import * as React from 'react'
 
-function MapSVG(props) {
-  const { mapViewStyle, svgPathList } = props
+type Props = {
+  mapView: {transform: string},
+  svgPathList: Array<React$Element<any>>,
+}
+
+function MapSVG(props: Props) {
+  const { mapView, svgPathList } = props
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       className="map-svg"
       viewBox="0 0 1009.12 665.24"
-      style={mapViewStyle}
+      style={mapView}
     >
       <g>
         {svgPathList}

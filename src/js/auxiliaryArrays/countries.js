@@ -1,3 +1,5 @@
+// @flow
+type Country = {id:string, title: string, d: string}
 export const countries = [
   {
     id:'AD',

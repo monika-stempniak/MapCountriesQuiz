@@ -1,11 +1,20 @@
-import React from 'react'
+// @flow
+import * as React from 'react'
 
-const Button = (props) => {
+type Props = {
+  btnType?: string,
+  btnClass: string,
+  isHidden?: boolean,
+  handleClick: () => void,
+  children: React.Node
+}
+
+const Button = (props: Props) => {
   const {
-    btnType = "button",
+    btnType = 'button',
     btnClass,
     isHidden = false,
-    handleClick,
+    handleClick
   } = props
 
   return <button

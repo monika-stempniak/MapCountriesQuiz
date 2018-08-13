@@ -1,47 +1,61 @@
+// @flow
 import React from 'react'
 import { Button } from '../components/Button.jsx'
 import { Icon } from '../components/Icon.jsx'
 import { MapSVG } from '../components/MapSVG.jsx'
 
-class Map extends React.Component {
+type Country = {id: string, title: string, d: string}
+
+type State = {
+  mapView: {transform: string},
+  countryNameDisplay: {display: string},
+  countryId: string,
+}
+
+type Props = {
+  clickMap: (countryId: string) => void,
+  countries: Array<Country>,
+}
+
+class Map extends React.Component<Props,State> {
   state = {
-    mapViewStyle: { transform: 'scale(1) translateY(0px)' },
-    countryName: { display: 'none' },
+    mapView: { transform: 'scale(1) translateY(0px)' },
+    countryNameDisplay: { display: 'none' },
     countryId: '',
   }
 
   handleClickCloser = () => {
     this.setState({
-      mapViewStyle: { transform: `scale(2) translateY(-100px)` },
+      mapView: { transform: `scale(2) translateY(-100px)` },
     })
   }
 
   handleClickFurther = () => {
     this.setState({
-      mapViewStyle: { transform: 'scale(1) translateY(0px)' },
+      mapView: { transform: 'scale(1) translateY(0px)' },
     })
   }
 
-  handleMouseEnter = (id) => {
+  handleMouseEnter = (id: string) => {
     this.setState({
-      countryName: { display: 'block' },
+      countryNameDisplay: { display: 'block' },
       countryId: id,
     })
   }
 
   handleMouseOut = () => {
     this.setState({
-      countryName: { display: 'none' },
+      countryNameDisplay: { display: 'none' },
       countryId: '',
     })
   }
 
-  handleClickInPath = (countryId) => {
+  handleClickInPath = (countryId: string) => {
     this.props.clickMap(countryId)
   }
-
-  prepareSVGPathList = () => {
-    const list = this.props.countries.map( elem => {
+  // prepareSVGPathList = (): Array<>     co zwraca?
+  prepareSVGPathList = (): Array<React$Element<any>> => {
+    const list = this.props.countries.map(elem => {
       return <path
         key={elem.id}
         id={elem.id}
@@ -55,7 +69,7 @@ class Map extends React.Component {
     return list
   }
 
-  prepareCountryTitle = () => {
+  prepareCountryTitle = (): string => {
     const country = this.props.countries.filter(elem => this.state.countryId === elem.id)
     let title = ''
     title = country.length > 0 ? country[0].title : ''
@@ -63,7 +77,7 @@ class Map extends React.Component {
   }
 
   render() {
-    const {mapViewStyle, countryName} = this.state
+    const {mapView, countryNameDisplay} = this.state
 
     const titleClass = this.prepareCountryTitle() !== '' ? 'isHovered' : ''
 
@@ -73,24 +87,24 @@ class Map extends React.Component {
           <h2 className="map-title visuallyhidden">World map</h2>
           <div
             className={`country-name ${titleClass}`}
-            style={countryName}
+            style={countryNameDisplay}
           >
             {this.prepareCountryTitle()}
           </div>
           <MapSVG
-            mapViewStyle={mapViewStyle}
+            mapView={mapView}
             svgPathList={this.prepareSVGPathList()}
           />
           <Button
             btnClass="btn-map btn-further"
-            isHidden="true"
+            isHidden={true}
             handleClick={this.handleClickFurther}
           >
             <Icon sign="minus" />
           </Button>
           <Button
             btnClass="btn-map btn-closer"
-            isHidden="true"
+            isHidden={true}
             handleClick={this.handleClickCloser}
           >
             <Icon sign="plus" />

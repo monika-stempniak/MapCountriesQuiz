@@ -5,7 +5,10 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack --watch",
-    "dev": "./node_modules/.bin/webpack-dev-server --inline --hot"
+    "dev": "webpack --inline --hot",
+    "flow": "flow",
+    "typecheck": "flow check src/components",
+    "flow-report": "flow-coverage-report"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

@@ -1,10 +1,24 @@
+// @flow
 import React from 'react'
 
-class Timer extends React.Component {
+type State = {
+  minutes: number,
+  seconds: number,
+  oneTimer: boolean,
+  intervalId: IntervalID,
+}
+
+type Props = {
+  getTime: (timeOut: boolean) => void,
+  isStartClicked: boolean,
+}
+
+class Timer extends React.Component<Props, State> {
   state = {
     minutes: 0,
     seconds: 0,
     oneTimer: false,
+    intervalId: setInterval(() => {})
   }
 
   tick = () => {
@@ -14,7 +28,7 @@ class Timer extends React.Component {
         minutes: 0,
         seconds: 0,
       })
-      clearInterval(this.timer)
+      clearInterval(this.state.intervalId)
       this.props.getTime(true)
     }
     else {
@@ -30,17 +44,17 @@ class Timer extends React.Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (this.state.oneTimer === false && nextProps.isStartClicked === true) {
-      this.timer = setInterval(this.tick, 1000)
       this.setState({
+        intervalId: setInterval(this.tick, 1000),
         oneTimer: true,
       })
     }
   }
 
   componentWillUnmount () {
-    clearInterval(this.timer)
+    clearInterval(this.state.intervalId)
   }
 
   render () {
