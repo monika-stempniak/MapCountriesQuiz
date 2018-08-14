@@ -17,7 +17,6 @@ type State = {
   isHintVisible: boolean,
   hintMessage: string,
   isTimeOut: boolean,
-  endDisplay: {display: string},
 }
 
 type Props = {}
@@ -36,7 +35,6 @@ class Topbar extends React.Component<Props,State> {
     isHintVisible: false,
     hintMessage: '',
     isTimeOut: false,
-    endDisplay: { display: 'block' },
   }
 
   getTimer = (timeOut: boolean) => {
@@ -107,7 +105,6 @@ class Topbar extends React.Component<Props,State> {
       isHintVisible: false,
       hintMessage: '',
       isTimeOut: false,
-      endDisplay: { display: 'block' },
     })
   }
 
@@ -132,7 +129,6 @@ class Topbar extends React.Component<Props,State> {
     const {
       counter,
       isTimeOut,
-      endDisplay,
       isHintLinkVisible,
       isHintVisible,
       hintMessage,
@@ -153,7 +149,7 @@ class Topbar extends React.Component<Props,State> {
         </Header>
         {
           (counter >= 21 || isTimeOut === true) ? (
-            <div className="the-end" style={endDisplay}>
+            <div className="the-end">
               <h2 className="the-end-title">
                 The end
               </h2>
