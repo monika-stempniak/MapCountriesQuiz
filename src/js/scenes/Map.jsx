@@ -8,7 +8,7 @@ type Country = {id: string, title: string, d: string}
 
 type State = {
   mapView: {transform: string},
-  countryNameDisplay: {display: string},
+  shouldDisplayCountryName: boolean,
   countryId: string,
 }
 
@@ -20,7 +20,6 @@ type Props = {
 class Map extends React.Component<Props,State> {
   state = {
     mapView: { transform: 'scale(1) translateY(0px)' },
-    countryNameDisplay: { display: 'none' },
     countryId: '',
   }
 
@@ -38,21 +37,18 @@ class Map extends React.Component<Props,State> {
 
   handleMouseEnter = (id: string) => {
     this.setState({
-      countryNameDisplay: { display: 'block' },
       countryId: id,
     })
   }
 
   handleMouseOut = () => {
     this.setState({
-      countryNameDisplay: { display: 'none' },
       countryId: '',
     })
   }
 
   handleBlur = () => {
     this.setState({
-      countryNameDisplay: { display: 'none' },
       countryId: '',
     })
   }
@@ -92,7 +88,7 @@ class Map extends React.Component<Props,State> {
   }
 
   render() {
-    const {mapView, countryNameDisplay} = this.state
+    const { mapView } = this.state
 
     const titleClass = this.prepareCountryTitle() !== '' ? 'isHovered' : ''
 
@@ -104,7 +100,6 @@ class Map extends React.Component<Props,State> {
           </h2>
           <div
             className={`country-name ${titleClass}`}
-            style={countryNameDisplay}
           >
             {this.prepareCountryTitle()}
           </div>

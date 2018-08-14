@@ -56,9 +56,11 @@
       left: 200px;
       border-radius: 10px;
       z-index: 3;
+      display: none;
 
       &.isHovered {
         padding: 10px;
+        display: block;
       }
     }
   }
