@@ -139,8 +139,8 @@ class Topbar extends React.Component<Props,State> {
       bad,
     } = this.state
 
-    const hintLinkVisibility = isHintLinkVisible ? {visibility: 'visible'} : {visibility: 'hidden'}
-    const hintVisibility = isHintVisible ? {visibility: 'visible'} : {visibility: 'hidden'}
+    const hintLinkVisibility = isHintLinkVisible ? 'isVisible' : ''
+    const hintVisibility = isHintVisible ? 'isVisible' : ''
 
     return (
       <section className="topbar">
@@ -165,8 +165,7 @@ class Topbar extends React.Component<Props,State> {
                 </h3>
                 <div className="quiz-row">
                   <Button
-                    btnClass="btn-quiz-hint"
-                    style={hintLinkVisibility}
+                    btnClass={`btn-quiz-hint ${hintLinkVisibility}`}
                     handleClick={this.handleClickHint}
                   >
                     Get a hint?
@@ -175,7 +174,7 @@ class Topbar extends React.Component<Props,State> {
                     Start
                   </Button>
                 </div>
-                <p className="hint" style={hintVisibility}>
+                <p className={`hint ${hintVisibility}`}>
                   {hintMessage}
                 </p>
               </div>

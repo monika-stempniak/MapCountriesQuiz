@@ -21,7 +21,12 @@
     }
 
     .hint {
+      visibility: hidden;
       transition: .5s;
+
+      &.isVisible {
+        visibility: visible;
+      }
     }
   
     .quiz-question {
@@ -47,9 +52,14 @@
         font-family: 'Black Ops One', cursive;
         outline: none;
         transition: .3s;
+        visibility: hidden;
 
         &:hover {
           color: $color-hover;
+        }
+
+        &.isVisible {
+          visibility: visible;
         }
       }
     }
