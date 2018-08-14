@@ -4,7 +4,7 @@ import React from 'react'
 type State = {
   minutes: number,
   seconds: number,
-  oneTimer: boolean,
+  isRunning: boolean,
   intervalId: IntervalID,
 }
 
@@ -14,9 +14,9 @@ type Props = {
 
 class Timer extends React.Component<Props, State> {
   state = {
-    minutes: 0,
+    minutes: 2,
     seconds: 0,
-    oneTimer: false,
+    isRunning: false,
     intervalId: setInterval(() => {}),
   }
 
@@ -26,44 +26,46 @@ class Timer extends React.Component<Props, State> {
   }
 
   tick = () => {
-    const { seconds, minutes, intervalId } = this.state
+    const {  minutes, seconds, intervalId } = this.state
     const { getTime } = this.props
 
-    const timeToChangeMap = 2
-    if (minutes === timeToChangeMap) {
+    if (minutes === 0 && seconds === 0) {
       this.setState({
         minutes: 0,
         seconds: 0,
+        isRunning: false,
       })
       clearInterval(intervalId)
       getTime(true)
     }
     else {
       this.setState({
-        seconds: seconds + 1,
+        seconds: seconds - 1,
       })
-      if (seconds > 59) {
+      if (seconds <= 0 && minutes !== 0) {
         this.setState({
-          minutes: minutes + 1,
-          seconds: 0,
+          minutes: minutes - 1,
+          seconds: 59,
         })
       }
     }
   }
 
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    const { oneTimer } = this.state
-    if (oneTimer === false && nextProps.isStartClicked === true) {
+    const { isRunning } = this.state
+    if (isRunning === false && nextProps.isStartClicked === true) {
+      const interval = 1000
       this.setState({
-        intervalId: setInterval(this.tick, 1000),
-        oneTimer: true,
+        intervalId: setInterval(this.tick, interval),
+        isRunning: true,
       })
     }
   }
 
   render () {
     const { seconds, minutes } = this.state
-    const displaySeconds = seconds < 10 ? `0${seconds}` : seconds
+    const digits = 9
+    const displaySeconds = seconds <= digits ? `0${seconds}` : seconds
 
     return (
       <span>
