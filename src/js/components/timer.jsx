@@ -10,6 +10,7 @@ type State = {
 
 type Props = {
   getTime: (timeOut: boolean) => void,
+  isStartClicked: boolean,
 }
 
 class Timer extends React.Component<Props, State> {
@@ -53,7 +54,8 @@ class Timer extends React.Component<Props, State> {
 
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
     const { isRunning } = this.state
-    if (isRunning === false && nextProps.isStartClicked === true) {
+    const { isStartClicked } = this.props
+    if (isRunning === false && nextProps.isStartClicked === true && isStartClicked !== nextProps.isStartClicked) {
       const interval = 1000
       this.setState({
         intervalId: setInterval(this.tick, interval),

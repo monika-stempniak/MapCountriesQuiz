@@ -4,7 +4,7 @@ import * as React from 'react'
 type Props = {
   btnClass: string,
   isHidden: boolean,
-  handleClick: () => void,
+  handleClick: (e: SyntheticMouseEvent<HTMLAnchorElement>) => void,
   children: React.Node
 }
 

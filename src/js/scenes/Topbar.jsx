@@ -19,7 +19,9 @@ type State = {
   isTimeOut: boolean,
 }
 
-type Props = {}
+type Props = {
+  answer: string,
+}
 
 class Topbar extends React.Component<Props,State> {
   state = {
@@ -117,9 +119,9 @@ class Topbar extends React.Component<Props,State> {
 
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
     const { isStartClicked, countryCode, good, bad } = this.state
-
+    const { answer } = this.props
     if (isStartClicked) {
-      if (nextProps.answer === countryCode) {
+      if (nextProps.answer === countryCode && answer !== nextProps.answer) {
         this.setState({
           good: good + 1,
         })
@@ -160,7 +162,7 @@ class Topbar extends React.Component<Props,State> {
               <h2 className="the-end-title">
                 The end
               </h2>
-              <Button btnClass="btn btn-play" handleClick={this.handleClickPlayAgain}>
+              <Button btnClass="btn btn-play" handleClick={this.handleClickPlayAgain} isHidden>
                 Play again
               </Button>
             </div>
@@ -174,10 +176,11 @@ class Topbar extends React.Component<Props,State> {
                   <Button
                     btnClass={`btn-quiz-hint ${hintLinkVisibility}`}
                     handleClick={this.handleClickHint}
+                    isHidden
                   >
                     Get a hint?
                   </Button>
-                  <Button btnClass="btn btn-start" handleClick={this.handleClickBtn}>
+                  <Button btnClass="btn btn-start" handleClick={this.handleClickBtn} isHidden>
                     Start
                   </Button>
                 </div>

@@ -8,7 +8,6 @@ type Country = {id: string, title: string, d: string}
 
 type State = {
   shouldMapViewComeCloser: boolean,
-  shouldDisplayCountryName: boolean,
   countryId: string,
 }
 
