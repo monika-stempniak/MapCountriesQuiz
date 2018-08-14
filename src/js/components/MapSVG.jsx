@@ -2,19 +2,18 @@
 import * as React from 'react'
 
 type Props = {
-  mapView: {transform: string},
+  isMapViewCloser: string,
   svgPathList: Array<React$Element<any>>,
 }
 
 function MapSVG(props: Props) {
-  const { mapView, svgPathList } = props
+  const { isMapViewCloser, svgPathList } = props
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="map-svg"
+      className={`map-svg ${isMapViewCloser}`}
       viewBox="0 0 1009.12 665.24"
-      style={mapView}
     >
       <g>
         {svgPathList}

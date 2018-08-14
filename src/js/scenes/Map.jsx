@@ -7,7 +7,7 @@ import MapSVG from '../components/MapSVG'
 type Country = {id: string, title: string, d: string}
 
 type State = {
-  mapView: {transform: string},
+  shouldMapViewComeCloser: boolean,
   shouldDisplayCountryName: boolean,
   countryId: string,
 }
@@ -19,19 +19,19 @@ type Props = {
 
 class Map extends React.Component<Props,State> {
   state = {
-    mapView: { transform: 'scale(1) translateY(0px)' },
+    shouldMapViewComeCloser: false,
     countryId: '',
   }
 
   handleClickCloser = () => {
     this.setState({
-      mapView: { transform: `scale(2) translateY(-100px)` },
+      shouldMapViewComeCloser: true,
     })
   }
 
   handleClickFurther = () => {
     this.setState({
-      mapView: { transform: 'scale(1) translateY(0px)' },
+      shouldMapViewComeCloser: false,
     })
   }
 
@@ -88,9 +88,10 @@ class Map extends React.Component<Props,State> {
   }
 
   render() {
-    const { mapView } = this.state
+    const { shouldMapViewComeCloser } = this.state
 
     const titleClass = this.prepareCountryTitle() !== '' ? 'isHovered' : ''
+    const isMapViewCloser = shouldMapViewComeCloser ? 'isCloser' : ''
 
     return (
       <section className="map">
@@ -104,7 +105,7 @@ class Map extends React.Component<Props,State> {
             {this.prepareCountryTitle()}
           </div>
           <MapSVG
-            mapView={mapView}
+            isMapViewCloser={isMapViewCloser}
             svgPathList={this.prepareSVGPathList()}
           />
           <Button
