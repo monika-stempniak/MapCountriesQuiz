@@ -17,17 +17,17 @@ class Timer extends React.Component<Props, State> {
     minutes: 0,
     seconds: 0,
     oneTimer: false,
-    intervalId: setInterval(() => {})
+    intervalId: setInterval(() => {}),
   }
 
   componentWillUnmount () {
-    const {intervalId} = this.state
+    const { intervalId } = this.state
     clearInterval(intervalId)
   }
 
   tick = () => {
-    const {seconds, minutes, intervalId} = this.state
-    const {getTime} = this.props
+    const { seconds, minutes, intervalId } = this.state
+    const { getTime } = this.props
 
     const timeToChangeMap = 2
     if (minutes === timeToChangeMap) {
@@ -52,7 +52,7 @@ class Timer extends React.Component<Props, State> {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    const {oneTimer} = this.state
+    const { oneTimer } = this.state
     if (oneTimer === false && nextProps.isStartClicked === true) {
       this.setState({
         intervalId: setInterval(this.tick, 1000),

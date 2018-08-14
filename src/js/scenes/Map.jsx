@@ -54,12 +54,12 @@ class Map extends React.Component<Props,State> {
   }
 
   handleClickInPath = (countryId: string) => {
-    const {clickMap} = this.props
+    const { clickMap } = this.props
     clickMap(countryId)
   }
 
   prepareSVGPathList = (): Array<React$Element<any>> => {
-    const {countries} = this.props
+    const { countries } = this.props
     const list = countries.map(elem => {
       return (
         <path
@@ -79,8 +79,8 @@ class Map extends React.Component<Props,State> {
   }
 
   prepareCountryTitle = (): string => {
-    const {countries} = this.props
-    const {countryId} = this.state
+    const { countries } = this.props
+    const { countryId } = this.state
     const country = countries.filter(elem => countryId === elem.id)
     let title = ''
     title = country.length > 0 ? country[0].title : ''

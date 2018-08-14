@@ -7,7 +7,7 @@ type Props = {
 }
 
 function Header(props: Props) {
-  const {section, children} = props
+  const { section, children } = props
   return (
     <header className={`${section}-header`}>
       <h1 className="header-title">

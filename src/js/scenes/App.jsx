@@ -28,7 +28,7 @@ class App extends React.Component<Props, State> {
   // }
 
   render() {
-    const {userAnswer} = this.state
+    const { userAnswer } = this.state
 
     return (
       <div>

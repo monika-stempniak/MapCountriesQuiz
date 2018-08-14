@@ -6,5 +6,11 @@ module.exports = {
     "plugin:jest/recommended",
     "plugin:flowtype/recommended",
   ],
-  "globals": { "fetch": false }
+  "globals": { "fetch": false },
+  "rules": {
+    "comma-dangle": ["error", "always-multiline"],
+    "object-shorthand": ["error", "always"],
+    "object-curly-spacing": ["error", "always"],
+    "array-bracket-spacing": ["error", "never"]
+  }
 };

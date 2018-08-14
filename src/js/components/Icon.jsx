@@ -6,7 +6,7 @@ type Props = {
 }
 
 function Icon(props: Props) {
-  const {sign} = props
+  const { sign } = props
   return <i className={`fas fa-${sign}`} />
 }
 
