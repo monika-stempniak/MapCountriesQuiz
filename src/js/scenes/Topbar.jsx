@@ -13,8 +13,8 @@ type State = {
   bad: number,
   counter: number,
   isStartClicked: boolean,
-  hintLinkVisible: {visibility: string},
-  hintVisible: {visibility: string},
+  isHintLinkVisible: boolean,
+  isHintVisible: boolean,
   hintMessage: string,
   isTimeOut: boolean,
   endDisplay: {display: string},
@@ -32,8 +32,8 @@ class Topbar extends React.Component<Props,State> {
     bad: 0,
     counter: 0,
     isStartClicked: false,
-    hintLinkVisible: { visibility: 'hidden' },
-    hintVisible: { visibility: 'hidden' },
+    isHintLinkVisible: false,
+    isHintVisible: false,
     hintMessage: '',
     isTimeOut: false,
     endDisplay: { display: 'block' },
@@ -47,7 +47,7 @@ class Topbar extends React.Component<Props,State> {
 
   hintTimer = () => setTimeout(() => {
     this.setState({
-      hintVisible: { visibility: 'hidden' },
+      isHintVisible: false,
     })
   }, 1000)
 
@@ -76,7 +76,7 @@ class Topbar extends React.Component<Props,State> {
           capital: countries[randomNumber].capital,
           counter: counter + 1,
           isStartClicked: true,
-          hintLinkVisible: { visibility: 'visible' },
+          isHintLinkVisible: true,
         }, () => {
           this.setState({
             hintMessage: `Capital: ${capital}`,
@@ -88,7 +88,7 @@ class Topbar extends React.Component<Props,State> {
   handleClickHint = (e: SyntheticMouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     this.setState({
-      hintVisible: { visibility: 'visible' },
+      isHintVisible: true,
     })
     this.hintTimer()
   }
@@ -103,8 +103,8 @@ class Topbar extends React.Component<Props,State> {
       bad: 0,
       counter: 0,
       isStartClicked: false,
-      hintLinkVisible: { visibility: 'hidden' },
-      hintVisible: { visibility: 'hidden' },
+      isHintLinkVisible: false,
+      isHintVisible: false,
       hintMessage: '',
       isTimeOut: false,
       endDisplay: { display: 'block' },
@@ -133,8 +133,8 @@ class Topbar extends React.Component<Props,State> {
       counter,
       isTimeOut,
       endDisplay,
-      hintLinkVisible,
-      hintVisible,
+      isHintLinkVisible,
+      isHintVisible,
       hintMessage,
       flag,
       countryName,
@@ -142,6 +142,9 @@ class Topbar extends React.Component<Props,State> {
       good,
       bad,
     } = this.state
+
+    const hintLinkVisibility = isHintLinkVisible ? {visibility: 'visible'} : {visibility: 'hidden'}
+    const hintVisibility = isHintVisible ? {visibility: 'visible'} : {visibility: 'hidden'}
 
     return (
       <section className="topbar">
@@ -167,7 +170,7 @@ class Topbar extends React.Component<Props,State> {
                 <div className="quiz-row">
                   <Button
                     btnClass="btn-quiz-hint"
-                    style={hintLinkVisible}
+                    style={hintLinkVisibility}
                     handleClick={this.handleClickHint}
                   >
                     Get a hint?
@@ -176,7 +179,7 @@ class Topbar extends React.Component<Props,State> {
                     Start
                   </Button>
                 </div>
-                <p className="hint" style={hintVisible}>
+                <p className="hint" style={hintVisibility}>
                   {hintMessage}
                 </p>
               </div>
