@@ -57,10 +57,16 @@ class Topbar extends React.Component<Props,State> {
   }
 
   fetchData = () => {
-    const {counter, capital} = this.state
+    const { counter, capital } = this.state
     const url = 'https://restcountries.eu/rest/v2/all'
     fetch(url)
-      .then( response => response.json() )
+      .then( response => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          throw new Error('A connection error has occurred!')
+        }
+      })
       .then( countries => {
         const excludedCountries = ['AQ', 'UM']
         let randomNumber = Math.floor(Math.random() * countries.length)
@@ -81,6 +87,7 @@ class Topbar extends React.Component<Props,State> {
           })
         })
       })
+      .catch(error => console.dir('Error: ', error)) // eslint-disable-line no-console
   }
 
   handleClickHint = (e: SyntheticMouseEvent<HTMLAnchorElement>) => {
