@@ -107,20 +107,22 @@ class Map extends React.Component<Props,State> {
             isMapViewCloser={isMapViewCloser}
             svgPathList={this.prepareSVGPathList()}
           />
-          <Button
-            btnClass="btn-map btn-further"
-            isHidden
-            handleClick={this.handleClickFurther}
-          >
-            <Icon sign="minus" />
-          </Button>
-          <Button
-            btnClass="btn-map btn-closer"
-            isHidden
-            handleClick={this.handleClickCloser}
-          >
-            <Icon sign="plus" />
-          </Button>
+          <div className="map-buttons">
+            <Button
+              btnClass="btn-map btn-further"
+              isHidden
+              handleClick={this.handleClickFurther}
+            >
+              <Icon sign="minus" />
+            </Button>
+            <Button
+              btnClass="btn-map btn-closer"
+              isHidden
+              handleClick={this.handleClickCloser}
+            >
+              <Icon sign="plus" />
+            </Button>
+          </div>
         </figure>
       </section>
     )
