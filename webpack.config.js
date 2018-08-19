@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   devtool: 'cheap-eval-source-map',
   entry: {
     main: path.join(__dirname, 'src/js', 'main.jsx'),
@@ -15,7 +15,7 @@ module.exports = {
     compress: true,
     port: 9000,
   },
-  resolve: {extensions: ['.js','.jsx']},
+  resolve: { extensions: ['.js','.jsx'] },
   module: {
     rules: [
       {
