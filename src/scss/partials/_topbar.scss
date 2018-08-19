@@ -1,15 +1,14 @@
 .topbar {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: auto;
+  height: 20%;
   background-color: $color-bg;
+  @include flexbox(space-around, center);
+  flex-direction: column;
   z-index: 2;
 
   .topbar-content {
+    width: 80%;
     @include flexbox(center, center);
-    padding: 5px 30px;
 
     .col-3 {
       flex: 1;
