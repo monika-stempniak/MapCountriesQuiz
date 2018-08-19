@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack --watch",
-    "dev": "webpack --inline --hot",
+    "dev": "webpack-dev-server --hot --inline",
     "flow": "flow",
     "flow:typecheck": "flow check src/components",
     "flow:coverage": "flow-coverage-report",
@@ -49,7 +49,8 @@
   },
   "dependencies": {
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "react-router-dom": "^4.3.1"
   },
   "jest": {
     "setupFiles": [
