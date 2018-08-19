@@ -12,6 +12,7 @@ module.exports = {
     "object-shorthand": ["error", "always"],
     "object-curly-spacing": ["error", "always"],
     "array-bracket-spacing": ["error", "never"],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-one-expression-per-line": [{ "allow": "literal" }],
   }
 };
