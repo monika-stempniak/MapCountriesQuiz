@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> matches the snapchot 1`] = `
+<header
+  className="undefined-header"
+>
+  <h1
+    className="header-title"
+  />
+</header>
+`;
