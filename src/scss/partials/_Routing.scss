@@ -1,0 +1,26 @@
+.links {
+  display: flex;
+  justify-content: flex-end;
+
+  &-link {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+
+    &:visited {
+      color: black;
+    }
+
+    &:active {
+      color: black;
+    }
+
+    &:hover {
+      background: $color-bg;
+    }
+  }
+
+  .active {
+    background-color: $color-hover;
+  }
+}
