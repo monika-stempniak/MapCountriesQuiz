@@ -20,7 +20,7 @@ const Links = () => (
 
 const Routing = () => (
   <Router>
-    <div>
+    <div className="routing">
       <Links />
       <Switch>
         <Route exact path="/" component={Home} />

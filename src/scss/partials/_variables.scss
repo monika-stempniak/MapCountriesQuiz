@@ -3,8 +3,6 @@ $color-bg: #eee;
 $color-hover: #dcce06;
 $color-good: #90aa0d;
 $color-bad: #e34141;
-$map-width: 1009.12px;
-$map-height: 665.24px;
 
 @mixin flexbox($justify-content, $align-items) {
   display: flex;
@@ -26,6 +24,6 @@ $map-height: 665.24px;
 
 %btn-hover {
   background-color: $color-main;
-  color:$color-bg;
+  color: $color-bg;
   cursor: pointer;
 }

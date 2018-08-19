@@ -1,0 +1,5 @@
+.quiz {
+  flex: 1;
+  @include flexbox(center, center);
+  flex-direction: column;
+}

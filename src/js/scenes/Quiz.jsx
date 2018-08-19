@@ -31,7 +31,7 @@ class Quiz extends React.Component<Props, State> {
     const { userAnswer } = this.state
 
     return (
-      <div>
+      <div className="quiz">
         <Topbar
           answer={userAnswer}
           // listId={this.prepareListOfCountriesId(countries)}
