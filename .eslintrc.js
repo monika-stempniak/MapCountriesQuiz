@@ -11,6 +11,7 @@ module.exports = {
     "comma-dangle": ["error", "always-multiline"],
     "object-shorthand": ["error", "always"],
     "object-curly-spacing": ["error", "always"],
-    "array-bracket-spacing": ["error", "never"]
+    "array-bracket-spacing": ["error", "never"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
 };
