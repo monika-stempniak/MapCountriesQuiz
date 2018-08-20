@@ -8,7 +8,7 @@ import {
 import Home from './Home'
 import Quiz from './Quiz'
 import Results from './Results'
-
+import AppWrapper from '../HOC/AppWrapper'
 
 const Links = () => (
   <nav className="links">
@@ -23,9 +23,9 @@ const Routing = () => (
     <div className="routing">
       <Links />
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={AppWrapper(Home)} />
         <Route path="/quiz" component={Quiz} />
-        <Route path="/results" component={Results} />
+        <Route path="/results" component={AppWrapper(Results)} />
       </Switch>
     </div>
   </Router>
