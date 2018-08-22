@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Header from '../components/Header'
 import Timer from '../components/Timer'
 import Button from '../components/Button'
-import addName from '../actions/nameAction'
+import addUserName from '../actions/userAction'
 
 type State = {
   countryCode: string,
@@ -23,7 +23,7 @@ type State = {
 
 type Props = {
   answer: string,
-  newUserName: string,
+  userName: string,
 }
 
 class Topbar extends React.Component<Props,State> {
@@ -151,7 +151,7 @@ class Topbar extends React.Component<Props,State> {
       bad,
     } = this.state
 
-    const { newUserName } = this.props
+    const { userName } = this.props
 
     const hintLinkVisibility = isHintLinkVisible ? 'isVisible' : ''
     const hintVisibility = isHintVisible ? 'isVisible' : ''
@@ -175,7 +175,7 @@ class Topbar extends React.Component<Props,State> {
             <div className="topbar-content">
               <div className="col-3">
                 <h3 className="quiz-question">
-                  <span className="quiz-user">{newUserName}, </span>
+                  <span className="quiz-user">{userName}, </span>
                   which country the flag belongs to?
                 </h3>
                 <div className="quiz-row">
@@ -252,7 +252,7 @@ class Topbar extends React.Component<Props,State> {
 }
 
 const mapStateToProps = state => ({
-  newUserName: state.userName.newUserName,
+  userName: state.user.name,
 })
 
-export default connect(mapStateToProps, { addName })(Topbar)
+export default connect(mapStateToProps, { addUserName })(Topbar)

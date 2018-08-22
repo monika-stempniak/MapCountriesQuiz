@@ -3,14 +3,15 @@ import * as React from 'react';
 import { connect } from 'react-redux'
 import Header from '../components/Header'
 import Button from '../components/Button'
-import addName from '../actions/nameAction'
+import addUserName from '../actions/userAction'
+import AppWrapper from '../HOC/AppWrapper'
 
 type State = {
   name: string,
 }
 
 type Props = {
-  addName: (name: string) => () => ({
+  addUserName: (name: string) => () => ({
     type: string,
     payload: string,
   }),
@@ -28,8 +29,12 @@ class Home extends React.Component<Props, State> {
     e.preventDefault()
 
     const { name } = this.state
-    const { addName } = this.props
-    addName(name)
+    const { addUserName } = this.props
+
+    addUserName(name)
+
+    // redirect <a src="/quiz" ><button></button></a>
+    // create src state and setStates
   }
 
   render() {
@@ -70,4 +75,6 @@ class Home extends React.Component<Props, State> {
   }
 }
 
-export default connect(null, { addName })(Home)
+const HomeHOC = AppWrapper(Home)
+
+export default connect(null, { addUserName })(HomeHOC)

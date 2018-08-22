@@ -1,3 +1,3 @@
-const NEW_USER_NAME = 'NEW_USER_NAME'
+const USER_NAME = 'USER_NAME'
 
-export default NEW_USER_NAME
+export default USER_NAME
