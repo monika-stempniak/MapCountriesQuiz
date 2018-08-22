@@ -1,13 +1,20 @@
 // @flow
 import * as React from 'react';
+import { connect } from 'react-redux'
 import Header from '../components/Header'
 import Button from '../components/Button'
+import addName from '../actions/nameAction'
 
 type State = {
   name: string,
 }
 
-type Props = {}
+type Props = {
+  addName: (name: string) => () => ({
+    type: string,
+    payload: string,
+  }),
+}
 
 class Home extends React.Component<Props, State> {
   state = { name: '' }
@@ -19,6 +26,10 @@ class Home extends React.Component<Props, State> {
 
   handleSubmit = (e: SyntheticMouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
+
+    const { name } = this.state
+    const { addName } = this.props
+    addName(name)
   }
 
   render() {
@@ -31,7 +42,7 @@ class Home extends React.Component<Props, State> {
         <br />
         <h2>Please enter your name to proceed</h2>
         <br />
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div>
             <label htmlFor="name">
               <input
@@ -49,7 +60,6 @@ class Home extends React.Component<Props, State> {
             <Button
               htmlType="submit"
               btnClass='btn btn-submit'
-              onSubmit={this.handleSubmit}
             >
               Submit
             </Button>
@@ -60,4 +70,4 @@ class Home extends React.Component<Props, State> {
   }
 }
 
-export default Home
+export default connect(null, { addName })(Home)
