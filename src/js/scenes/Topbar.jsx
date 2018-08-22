@@ -162,7 +162,7 @@ class Topbar extends React.Component<Props,State> {
               <h2 className="the-end-title">
                 The end
               </h2>
-              <Button btnClass="btn btn-play" handleClick={this.handleClickPlayAgain} isHidden>
+              <Button btnClass="btn btn-play" handleClick={this.handleClickPlayAgain}>
                 Play again
               </Button>
             </div>
@@ -176,11 +176,10 @@ class Topbar extends React.Component<Props,State> {
                   <Button
                     btnClass={`btn-quiz-hint ${hintLinkVisibility}`}
                     handleClick={this.handleClickHint}
-                    isHidden
                   >
                     Get a hint?
                   </Button>
-                  <Button btnClass="btn btn-start" handleClick={this.handleClickBtn} isHidden>
+                  <Button btnClass="btn btn-start" handleClick={this.handleClickBtn}>
                     Start
                   </Button>
                 </div>
