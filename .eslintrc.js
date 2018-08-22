@@ -6,6 +6,10 @@ module.exports = {
     "plugin:jest/recommended",
     "plugin:flowtype/recommended",
   ],
+  "env": {
+    "node": true,
+    "browser": true
+  },
   "globals": { "fetch": false },
   "rules": {
     "comma-dangle": ["error", "always-multiline"],
