@@ -1,15 +1,15 @@
-import NEW_NAME from '../actions/types'
+import NEW_USER_NAME from '../actions/types'
 
 const initialState = {
-  new_name: '',
+  newUserName: '',
 }
 
 export default function (state = initialState, action) {
   switch(action.type) {
-    case NEW_NAME:
+    case NEW_USER_NAME:
       return {
         ...state,
-        new_name: action.payload,
+        newUserName: action.payload,
       }
     default:
     return state
