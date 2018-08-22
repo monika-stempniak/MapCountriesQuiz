@@ -6,7 +6,6 @@ type Props = {
   btnClass: string,
   isHidden?: boolean,
   handleClick?: (e: SyntheticMouseEvent<HTMLAnchorElement>) => void,
-  handleSubmit?: (e: SyntheticMouseEvent<HTMLButtonElement>) => void,
   children: React.Node,
 }
 
@@ -17,7 +16,6 @@ const Button = (props: Props) => {
     btnClass,
     isHidden,
     handleClick,
-    handleSubmit,
     children,
   } = props
 
@@ -27,7 +25,6 @@ const Button = (props: Props) => {
       className={btnClass}
       aria-hidden={isHidden}
       onClick={handleClick}
-      onSubmit={handleSubmit}
     >
       {children}
     </button>
@@ -38,7 +35,6 @@ Button.defaultProps = {
   htmlType: 'button',
   isHidden: false,
   handleClick: () => {},
-  handleSubmit: () => {},
 };
 
 export default Button
