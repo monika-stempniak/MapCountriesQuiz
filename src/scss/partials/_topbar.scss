@@ -30,6 +30,12 @@
   
     .quiz-question {
       font-size: 1.3rem;
+
+      .quiz-user {
+        display: block;
+        color: $color-hover;
+        font-size: 30px;
+      }
     }
   
     .quiz-row {
