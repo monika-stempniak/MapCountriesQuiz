@@ -3,6 +3,7 @@ $color-bg: #eee;
 $color-hover: #dcce06;
 $color-good: #90aa0d;
 $color-bad: #e34141;
+$color-gray: #ccc;
 
 @mixin flexbox($justify-content, $align-items) {
   display: flex;
