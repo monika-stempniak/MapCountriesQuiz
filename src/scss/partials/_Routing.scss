@@ -24,6 +24,11 @@
     &:hover {
       background: $color-bg;
     }
+
+    &.links-link--disabled {
+      cursor: not-allowed;
+      color: $color-gray;
+    }
   }
 
   .active {
