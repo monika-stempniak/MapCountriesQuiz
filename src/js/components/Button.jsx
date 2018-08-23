@@ -7,6 +7,7 @@ type Props = {
   isHidden?: boolean,
   handleClick?: (e: SyntheticMouseEvent<HTMLAnchorElement>) => void,
   children: React.Node,
+  isDisable?: boolean,
 }
 
 const Button = (props: Props) => {
@@ -17,6 +18,7 @@ const Button = (props: Props) => {
     isHidden,
     handleClick,
     children,
+    isDisable,
   } = props
 
   return (
@@ -25,6 +27,7 @@ const Button = (props: Props) => {
       className={btnClass}
       aria-hidden={isHidden}
       onClick={handleClick}
+      disabled={isDisable}
     >
       {children}
     </button>
@@ -35,6 +38,7 @@ Button.defaultProps = {
   htmlType: 'button',
   isHidden: false,
   handleClick: () => {},
+  isDisable: false,
 };
 
 export default Button

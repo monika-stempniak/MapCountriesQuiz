@@ -1,13 +1,14 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import addUserName from '../actions/userAction'
-import AppWrapper from '../HOC/AppWrapper'
 
 type State = {
   name: string,
+  isDisable: boolean,
 }
 
 type Props = {
@@ -15,30 +16,41 @@ type Props = {
     type: string,
     payload: string,
   }),
+  history: Array<string>,
 }
 
 class Home extends React.Component<Props, State> {
-  state = { name: '' }
+  state = {
+    name: '',
+    isDisable: true,
+  }
 
   handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     (e.target: HTMLInputElement)
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({
+      [e.target.name]: e.target.value,
+      isDisable: false,
+    })
   }
 
   handleSubmit = (e: SyntheticMouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
 
     const { name } = this.state
-    const { addUserName } = this.props
+    const { addUserName, history } = this.props
 
     addUserName(name)
 
-    // redirect <a src="/quiz" ><button></button></a>
-    // create src state and setStates
+    history.push('/quiz')
   }
 
   render() {
-    const { name } = this.state
+    const { name, isDisable } = this.state
+
+    const disabledClass = isDisable
+    ? 'btn-disabled'
+    : ''
+
     return (
       <section className="home">
         <Header section="home">
@@ -64,7 +76,8 @@ class Home extends React.Component<Props, State> {
             <br />
             <Button
               htmlType="submit"
-              btnClass='btn btn-submit'
+              btnClass={`btn btn-submit ${disabledClass}`}
+              isDisable={isDisable}
             >
               Submit
             </Button>
@@ -75,6 +88,4 @@ class Home extends React.Component<Props, State> {
   }
 }
 
-const HomeHOC = AppWrapper(Home)
-
-export default connect(null, { addUserName })(HomeHOC)
+export default connect(null, { addUserName })(withRouter(Home))
