@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import AppWrapper from '../HOC/AppWrapper'
 
 const Results = () => {
   return (
@@ -11,4 +12,4 @@ const Results = () => {
   )
 }
 
-export default Results
+export default AppWrapper(Results)

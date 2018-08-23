@@ -1,18 +1,11 @@
 // @flow
 import * as React from 'react';
 
-type Props = {
-  addUserName: (name: string) => () => ({
-    type: string,
-    payload: string,
-  }),
-}
-
-const AppWrapper = (WrappedComponent: React.ComponentType<Props>): React.ComponentType<Props> => {
-  const Wrapper = (props) => {
+const AppWrapper = (WrappedComponent: React.ComponentType<{}>): React.ComponentType<{}> => {
+  const Wrapper = () => {
     return (
       <div className="app-wrapper">
-        <WrappedComponent {...props} />
+        <WrappedComponent />
       </div>
     )
   }
