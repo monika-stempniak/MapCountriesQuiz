@@ -74,25 +74,6 @@
       height: 80px;
     }
   }
-
-  .the-end {
-    text-align: center;
-
-    .the-end-title {
-      font-size: 2.3rem;
-      text-transform: capitalize;
-      letter-spacing: 2px;
-    }
-
-    .btn-play {
-      @extend %btn;
-      margin-bottom: 10px;
-
-      &:hover {
-        @extend %btn-hover;
-      }
-    }
-  }
 }
 
 // -----------------------

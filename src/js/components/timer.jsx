@@ -15,8 +15,8 @@ type Props = {
 
 class Timer extends React.Component<Props, State> {
   state = {
-    minutes: 2,
-    seconds: 0,
+    minutes: 0,
+    seconds: 10,
     isRunning: false,
     intervalId: setInterval(() => {}),
   }
