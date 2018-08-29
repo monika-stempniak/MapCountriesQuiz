@@ -1,13 +1,10 @@
 // @flow
 import React from 'react'
-import Button from '../components/Button'
-import Icon from '../components/Icon'
 import MapSVG from '../components/MapSVG'
 
 type Country = {id: string, title: string, d: string}
 
 type State = {
-  shouldMapViewComeCloser: boolean,
   countryId: string,
 }
 
@@ -18,20 +15,7 @@ type Props = {
 
 class Map extends React.Component<Props,State> {
   state = {
-    shouldMapViewComeCloser: false,
     countryId: '',
-  }
-
-  handleClickCloser = () => {
-    this.setState({
-      shouldMapViewComeCloser: true,
-    })
-  }
-
-  handleClickFurther = () => {
-    this.setState({
-      shouldMapViewComeCloser: false,
-    })
   }
 
   handleMouseEnter = (id: string) => {
@@ -87,42 +71,22 @@ class Map extends React.Component<Props,State> {
   }
 
   render() {
-    const { shouldMapViewComeCloser } = this.state
-
     const titleClass = this.prepareCountryTitle() !== '' ? 'isHovered' : ''
-    const isMapViewCloser = shouldMapViewComeCloser ? 'isCloser' : ''
 
     return (
       <section className="map">
         <figure className="map-container">
-          <h2 className="map-title visuallyhidden">
+          <figcaption className="map-title visuallyhidden">
             World map
-          </h2>
+          </figcaption>
           <div
             className={`country-name ${titleClass}`}
           >
             {this.prepareCountryTitle()}
           </div>
           <MapSVG
-            isMapViewCloser={isMapViewCloser}
             svgPathList={this.prepareSVGPathList()}
           />
-          <div className="map-buttons">
-            <Button
-              btnClass="btn-map btn-further"
-              isHidden
-              handleClick={this.handleClickFurther}
-            >
-              <Icon sign="minus" />
-            </Button>
-            <Button
-              btnClass="btn-map btn-closer"
-              isHidden
-              handleClick={this.handleClickCloser}
-            >
-              <Icon sign="plus" />
-            </Button>
-          </div>
         </figure>
       </section>
     )

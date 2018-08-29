@@ -6242,6 +6242,10 @@ react-is@^16.4.2:
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.4.2.tgz#84891b56c2b6d9efdee577cc83501dfc5ecead88"
 
+react-map-interaction@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-map-interaction/-/react-map-interaction-1.2.0.tgz#cc81554f9d41ced14afa3b7436d92b29242bad39"
+
 react-reconciler@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.7.0.tgz#9614894103e5f138deeeb5eabaf3ee80eb1d026d"
