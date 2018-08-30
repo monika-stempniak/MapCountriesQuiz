@@ -2,7 +2,7 @@
 import * as React from 'react'
 import Map from './Map'
 import Topbar  from './Topbar'
-import countries from '../auxiliaryArrays/countries'
+import countries from '../helpers/countries'
 
 type State = {
   userAnswer: string,
