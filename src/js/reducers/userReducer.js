@@ -1,9 +1,22 @@
-import { USER_NAME, USER_RESULTS } from '../actions/types'
+import { USER_NAME,  USER_ANSWERS, FETCH_COUNTRIES } from '../actions/types'
 
 const initialState = {
   name: '',
-  results: [],
+  countries: [],
   answers: [],
+}
+
+function addAnswers(state, answer) {
+  const copyStateAnswers = [...state.answers];
+  copyStateAnswers.push(answer);
+
+  // const copyStateAnswers = JSON.parse(JSON.strigify(state.answers))
+  // copyStateAnswers.push(result);
+
+  return {
+    ...state,
+    answers: copyStateAnswers,
+  }
 }
 
 export default function (state = initialState, action) {
@@ -13,10 +26,12 @@ export default function (state = initialState, action) {
         ...state,
         name: action.payload,
       }
-    case USER_RESULTS:
+    case USER_ANSWERS:
+      return addAnswers(state, action.payload);
+    case FETCH_COUNTRIES:
       return {
         ...state,
-        results: action.payload,
+        countries: action.payload,
       }
     default:
     return state
