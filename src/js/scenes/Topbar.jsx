@@ -5,65 +5,60 @@ import { withRouter } from 'react-router-dom'
 import Header from '../components/Header'
 import Timer from '../components/Timer'
 import Button from '../components/Button'
-import { addUserName, addUserResults } from '../actions/userAction'
-
-type Result = {
-  id: number,
-  country: string,
-  code: string,
-  flag: string,
-  capital: string,
-  answer?: string,
-}
-
-type Answer = {
-  code: string,
-  answer: string,
-}
+import { addUserName, addUserAnswers, fetchCountries } from '../actions/userAction'
 
 type State = {
-  countryCode: string,
-  countryName: string,
-  flag: string,
-  capital: string,
-  good: number,
-  bad: number,
-  counter: number,
+  countries: Array<any>,
+  country: {
+    code: string,
+    name: string,
+    flag: string,
+    capital: string,
+  },
+  goodAnswer: number,
+  badAnswer: number,
   isStartClicked: boolean,
   isHintLinkVisible: boolean,
   isHintVisible: boolean,
   hintMessage: string,
   isTimeOut: boolean,
-  results: Array<Result>,
-  answers: Array<Answer>,
 }
 
 type Props = {
   answer: string,
   userName: string,
-  addUserResults: (results: Array<Result>) => () => ({
+  fetchCountries: () => () => ({
     type: string,
-    payload: Array<Result>,
+    payload: Array<any>,
   }),
+  countries: Array<any>, //eslint-disable-line
   history: Array<string>,
+  addUserAnswers: ({ code: string, answer: boolean }) => () => ({
+    type: string,
+    payload: Array<{ code: string, answer: boolean }>,
+  }),
 }
 
-class Topbar extends React.Component<Props,State> {
+class Topbar extends React.Component<Props, State> {
   state = {
-    countryCode: '',
-    countryName: '',
-    flag: 'http://via.placeholder.com/150x80?text=COUNTRY+FLAG',
-    capital: '',
-    good: 0,
-    bad: 0,
-    counter: 0,
+    countries: [],
+    country: {
+      code: '',
+      name: '',
+      flag: 'http://via.placeholder.com/150x80?text=COUNTRY+FLAG',
+      capital: '',
+    },
+    goodAnswer: 0,
+    badAnswer: 0,
     isStartClicked: false,
     isHintLinkVisible: false,
     isHintVisible: false,
     hintMessage: '',
     isTimeOut: false,
-    results: [],
-    answers: [],
+  }
+
+  componentWillMount() {
+    this.props.fetchCountries()
   }
 
   getTimer = (timeOut: boolean) => {
@@ -72,59 +67,24 @@ class Topbar extends React.Component<Props,State> {
     })
   }
 
-  getResults = (result: Result) => {
-    const { results } = this.state
-    let combineResults = [...results, result]
+  handleStopAndResetQuiz = () => {
+    this.props.history.push('/results')
     this.setState({
-      results: combineResults,
-    })
-  }
-
-  getAnswers = (answer: Answer) => {
-    const { answers } = this.state
-    let combineAnswers = [...answers, answer]
-    this.setState({
-      answers: combineAnswers,
-    })
-  }
-
-  pushResultsAndAnswers = () => {
-    const {
-      counter,
-      isTimeOut,
-      results,
-      answers,
-    } = this.state
-    const { addUserResults, history } = this.props
-    if (counter >= 4 || isTimeOut === true) {
-      let scores = results.map(result => {
-        answers.forEach(answer => {
-          if (result.code === answer.code) {
-              result.answer = answer.answer
-            }
-          })
-        return result
-      })
-
-      addUserResults(scores)
-
-      history.push('/results')
-
-      this.setState({
-        countryCode: '',
-        countryName: '',
+      countries: [],
+      country: {
+        code: '',
+        name: '',
         flag: 'http://via.placeholder.com/150x80?text=COUNTRY+FLAG',
         capital: '',
-        good: 0,
-        bad: 0,
-        counter: 0,
-        isStartClicked: false,
-        isHintLinkVisible: false,
-        isHintVisible: false,
-        hintMessage: '',
-        isTimeOut: false,
-      })
-    }
+      },
+      goodAnswer: 0,
+      badAnswer: 0,
+      isStartClicked: false,
+      isHintLinkVisible: false,
+      isHintVisible: false,
+      hintMessage: '',
+      isTimeOut: false,
+    })
   }
 
   hintTimer = () => setTimeout(() => {
@@ -132,63 +92,6 @@ class Topbar extends React.Component<Props,State> {
       isHintVisible: false,
     })
   }, 1000)
-
-  handleClickStart = () => {
-    const { isTimeOut, counter } = this.state
-    if (isTimeOut !== true || counter <= 3) {
-      this.fetchData()
-    }
-  }
-
-  fetchData = () => {
-    const { counter,
-      capital,
-      countryName,
-      countryCode,
-      flag,
-    } = this.state
-    const url = 'https://restcountries.eu/rest/v2/all'
-    fetch(url)
-      .then( response => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw new Error('A connection error has occurred!')
-        }
-      })
-      .then( countries => {
-        const excludedCountries = ['AQ', 'UM']
-        let randomNumber = Math.floor(Math.random() * countries.length)
-        if (excludedCountries.indexOf(countries[randomNumber].alpha2Code) !== -1) {
-          randomNumber = Math.floor(Math.random() * countries.length)
-        }
-        this.setState({
-          countryName: countries[randomNumber].name,
-          countryCode: countries[randomNumber].alpha2Code,
-          flag: countries[randomNumber].flag,
-          capital: countries[randomNumber].capital,
-          counter: counter + 1,
-          isStartClicked: true,
-          isHintLinkVisible: true,
-        }, () => {
-          this.setState({
-            hintMessage: `Capital: ${capital}`,
-          })
-
-          if (counter > 0) {
-
-            this.getResults({
-              id: counter,
-              country: countryName,
-              code: countryCode,
-              flag,
-              capital,
-            })
-          }
-        })
-      })
-      .catch(error => console.dir('Error: ', error)) // eslint-disable-line no-console
-  }
 
   handleClickHint = (e: SyntheticMouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -198,42 +101,72 @@ class Topbar extends React.Component<Props,State> {
     this.hintTimer()
   }
 
+  handleClickStart = () => {
+    const { countries } = this.state
+    const { name, capital } = this.state.country
+    this.setState({
+      isStartClicked: true,
+      country: {
+        code: countries[0].alpha2Code,
+        name: countries[0].name,
+        flag: countries[0].flag,
+        capital: countries[0].capital,
+      },
+      isHintLinkVisible: true,
+    }, () => {
+      this.setState({
+        hintMessage: capital ? `Capital: ${capital}` : `Country: ${name}`,
+      })
+    })
+  }
+
+  handleDeleteCountry = () => {
+    let countries = [...this.state.countries]; //eslint-disable-line
+    countries.shift()
+    this.setState({ countries })
+  }
+
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    const { isStartClicked, countryCode, good, bad } = this.state
+    const { isStartClicked, goodAnswer, badAnswer, countries, isTimeOut } = this.state
+    const { code } = this.state.country
     const { answer } = this.props
-    if (isStartClicked) {
-      if (nextProps.answer === countryCode && answer !== nextProps.answer) {
+    if(nextProps.countries) {
+      this.setState({
+        countries: [...nextProps.countries],
+      })
+    }
+    if (nextProps.answer && isStartClicked) {
+      this.handleDeleteCountry()
+      const countriesArrayLength = countries.length - 1
+      if (isTimeOut === true || countriesArrayLength === 0) {
+        this.handleStopAndResetQuiz()
+      } else {
+        this.handleClickStart()
+      }
+      if (nextProps.answer === code && answer !== nextProps.answer) {
         this.setState({
-          good: good + 1,
-        }, () => this.getAnswers({
-          code: countryCode,
-          answer: 'good',
-        }))
+          goodAnswer: goodAnswer + 1,
+        }, () => this.props.addUserAnswers({ code, answer: true }))
       } else {
         this.setState({
-          bad: bad + 1,
-        },() => this.getAnswers({
-          code: countryCode,
-          answer: 'bad',
-        }))
+          badAnswer: badAnswer + 1,
+        },() => this.props.addUserAnswers({ code, answer: false }))
       }
-      this.handleClickStart()
-      this.pushResultsAndAnswers()
     }
   }
 
   render() {
     const {
-      counter,
+      countries,
       isHintLinkVisible,
       isHintVisible,
       hintMessage,
-      flag,
-      countryName,
       isStartClicked,
-      good,
-      bad,
+      goodAnswer,
+      badAnswer,
     } = this.state
+
+    const { flag, name } = this.state.country
 
     const { userName } = this.props
 
@@ -270,7 +203,7 @@ class Topbar extends React.Component<Props,State> {
             <img
               className="flag"
               src={flag}
-              alt={`${countryName} flag`}
+              alt={`${name}'s flag`}
             />
           </div>
           <div className="col-3">
@@ -291,9 +224,9 @@ class Topbar extends React.Component<Props,State> {
                   <td>
                     <Timer isStartClicked={isStartClicked} getTime={this.getTimer} />
                   </td>
-                  <td>{`${counter}/3`}</td>
-                  <td className="good">{good}</td>
-                  <td className="bad">{bad}</td>
+                  <td>{`${countries.length}/3`}</td>
+                  <td className="good">{goodAnswer}</td>
+                  <td className="bad">{badAnswer}</td>
                 </tr>
               </tbody>
             </table>
@@ -306,6 +239,7 @@ class Topbar extends React.Component<Props,State> {
 
 const mapStateToProps = state => ({
   userName: state.user.name,
+  countries: state.user.countries,
 })
 
-export default connect(mapStateToProps, { addUserName, addUserResults })(withRouter(Topbar))
+export default connect(mapStateToProps, { addUserName, addUserAnswers, fetchCountries })(withRouter(Topbar))
