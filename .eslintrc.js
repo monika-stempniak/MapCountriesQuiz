@@ -20,5 +20,7 @@ module.exports = {
     "react/jsx-one-expression-per-line": [{ "allow": "literal" }],
     "react/button-has-type": "off",
     "no-console": "warn",
+    "import/prefer-default-export": "off",
+    "react/destructuring-assignment": "off",
   }
 };
