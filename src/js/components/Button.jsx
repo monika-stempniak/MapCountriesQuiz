@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import * as React from "react";
 
 type Props = {
   htmlType?: string,
@@ -7,19 +7,18 @@ type Props = {
   isHidden?: boolean,
   handleClick?: (e: SyntheticMouseEvent<HTMLAnchorElement>) => void,
   children: React.Node,
-  isDisable?: boolean,
-}
+  isDisable?: boolean
+};
 
 const Button = (props: Props) => {
-
   const {
     htmlType,
     btnClass,
     isHidden,
     handleClick,
     children,
-    isDisable,
-  } = props
+    isDisable
+  } = props;
 
   return (
     <button
@@ -31,14 +30,14 @@ const Button = (props: Props) => {
     >
       {children}
     </button>
-  )
-}
-
-Button.defaultProps = {
-  htmlType: 'button',
-  isHidden: false,
-  handleClick: () => {},
-  isDisable: false,
+  );
 };
 
-export default Button
+Button.defaultProps = {
+  htmlType: "button",
+  isHidden: false,
+  handleClick: () => {},
+  isDisable: false
+};
+
+export default Button;
