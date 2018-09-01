@@ -4,8 +4,18 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
-  font-family: 'Black Ops One', cursive;
+  font-family: "Black Ops One", cursive;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .visuallyhidden {
