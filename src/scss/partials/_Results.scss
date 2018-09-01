@@ -1,23 +1,23 @@
-.results-wrapper {
-  width: 80%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
+.results {
+  &__header {
+    @extend %section-header;
+  }
 
-  .results {
+  &__content {
     width: 100%;
+    margin: 20px 0;
+  }
 
-    .btn-play {
-      @extend %btn;
-      margin-bottom: 10px;
+  &__button--play {
+    @extend %btn;
+    margin: 10px 0;
 
-      &:hover {
-        @extend %btn-hover;
-      }
+    &:hover {
+      @extend %btn-hover;
     }
+  }
 
-    .table-results {
-      width: 100%;
-    }
+  hr {
+    border: 0.5px solid $color-light-gray;
   }
 }
