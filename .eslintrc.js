@@ -1,26 +1,44 @@
 module.exports = {
-  "extends": [
+  extends: [
     "airbnb",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:jest/recommended",
     "plugin:flowtype/recommended",
+    "plugin:prettier/recommended"
   ],
-  "env": {
-    "node": true,
-    "browser": true
+  env: {
+    node: true,
+    browser: true
   },
-  "globals": { "fetch": false },
-  "rules": {
+  globals: {
+    fetch: false
+  },
+  rules: {
     "comma-dangle": ["error", "always-multiline"],
     "object-shorthand": ["error", "always"],
     "object-curly-spacing": ["error", "always"],
     "array-bracket-spacing": ["error", "never"],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/jsx-one-expression-per-line": [{ "allow": "literal" }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        extensions: [".js", ".jsx"]
+      }
+    ],
+    "react/jsx-one-expression-per-line": [
+      {
+        allow: "literal"
+      }
+    ],
     "react/button-has-type": "off",
     "no-console": "warn",
     "import/prefer-default-export": "off",
     "react/destructuring-assignment": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        trailingComma: "all"
+      }
+    ]
   }
 };
