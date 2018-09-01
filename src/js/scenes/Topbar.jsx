@@ -8,7 +8,7 @@ import Button from "../components/Button";
 import {
   addUserName,
   addUserAnswers,
-  fetchCountries
+  fetchCountries,
 } from "../actions/userAction";
 
 type State = {
@@ -17,7 +17,7 @@ type State = {
     code: string,
     name: string,
     flag: string,
-    capital: string
+    capital: string,
   },
   goodAnswer: number,
   badAnswer: number,
@@ -25,7 +25,7 @@ type State = {
   isHintLinkVisible: boolean,
   isHintVisible: boolean,
   hintMessage: string,
-  isTimeOut: boolean
+  isTimeOut: boolean,
 };
 
 type Props = {
@@ -33,7 +33,7 @@ type Props = {
   userName: string,
   fetchCountries: () => () => {
     type: string,
-    payload: Array<any>
+    payload: Array<any>,
   },
   countries: Array<any>, //eslint-disable-line
   history: Array<string>,
@@ -41,9 +41,9 @@ type Props = {
     type: string,
     payload: Array<{
       code: string,
-      answer: boolean
-    }>
-  }
+      answer: boolean,
+    }>,
+  },
 };
 
 class Topbar extends React.Component<Props, State> {
@@ -53,7 +53,7 @@ class Topbar extends React.Component<Props, State> {
       code: "",
       name: "",
       flag: "http://via.placeholder.com/150x80?text=COUNTRY+FLAG",
-      capital: ""
+      capital: "",
     },
     goodAnswer: 0,
     badAnswer: 0,
@@ -61,7 +61,7 @@ class Topbar extends React.Component<Props, State> {
     isHintLinkVisible: false,
     isHintVisible: false,
     hintMessage: "",
-    isTimeOut: false
+    isTimeOut: false,
   };
 
   componentWillMount() {
@@ -80,7 +80,7 @@ class Topbar extends React.Component<Props, State> {
         code: "",
         name: "",
         flag: "http://via.placeholder.com/150x80?text=COUNTRY+FLAG",
-        capital: ""
+        capital: "",
       },
       goodAnswer: 0,
       badAnswer: 0,
@@ -88,7 +88,7 @@ class Topbar extends React.Component<Props, State> {
       isHintLinkVisible: false,
       isHintVisible: false,
       hintMessage: "",
-      isTimeOut: false
+      isTimeOut: false,
     });
   };
 
@@ -113,13 +113,13 @@ class Topbar extends React.Component<Props, State> {
           code: countries[0].alpha2Code,
           name: countries[0].name,
           flag: countries[0].flag,
-          capital: countries[0].capital
+          capital: countries[0].capital,
         },
-        isHintLinkVisible: true
+        isHintLinkVisible: true,
       },
       () => {
         this.setState({
-          hintMessage: capital ? `Capital: ${capital}` : `Country: ${name}`
+          hintMessage: capital ? `Capital: ${capital}` : `Country: ${name}`,
         });
       }
     );
@@ -137,13 +137,13 @@ class Topbar extends React.Component<Props, State> {
       goodAnswer,
       badAnswer,
       countries,
-      isTimeOut
+      isTimeOut,
     } = this.state;
     const { code } = this.state.country;
     const { answer } = this.props;
     if (nextProps.countries) {
       this.setState({
-        countries: [...nextProps.countries]
+        countries: [...nextProps.countries],
       });
     }
     if (nextProps.answer && isStartClicked) {
@@ -157,14 +157,14 @@ class Topbar extends React.Component<Props, State> {
       if (nextProps.answer === code && answer !== nextProps.answer) {
         this.setState(
           {
-            goodAnswer: goodAnswer + 1
+            goodAnswer: goodAnswer + 1,
           },
           () => this.props.addUserAnswers({ code, answer: true })
         );
       } else {
         this.setState(
           {
-            badAnswer: badAnswer + 1
+            badAnswer: badAnswer + 1,
           },
           () => this.props.addUserAnswers({ code, answer: false })
         );
@@ -180,7 +180,7 @@ class Topbar extends React.Component<Props, State> {
       hintMessage,
       isStartClicked,
       goodAnswer,
-      badAnswer
+      badAnswer,
     } = this.state;
 
     const { flag, name } = this.state.country;
@@ -267,7 +267,7 @@ class Topbar extends React.Component<Props, State> {
 
 const mapStateToProps = state => ({
   userName: state.user.name,
-  countries: state.user.countries
+  countries: state.user.countries,
 });
 
 export default connect(

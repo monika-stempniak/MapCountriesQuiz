@@ -8,7 +8,7 @@ import { addUserName } from "../actions/userAction";
 
 type State = {
   name: string,
-  isDisable: boolean
+  isDisable: boolean,
 };
 
 type Props = {
@@ -16,22 +16,22 @@ type Props = {
     name: string
   ) => () => {
     type: string,
-    payload: string
+    payload: string,
   },
-  history: Array<string>
+  history: Array<string>,
 };
 
 class Home extends React.Component<Props, State> {
   state = {
     name: "",
-    isDisable: true
+    isDisable: true,
   };
 
   handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     (e.target: HTMLInputElement);
     this.setState({
       [e.target.name]: e.target.value,
-      isDisable: false
+      isDisable: false,
     });
   };
 

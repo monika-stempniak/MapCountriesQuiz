@@ -3,7 +3,7 @@ import * as React from "react";
 
 type Props = {
   userName: string,
-  children: React.Node
+  children: React.Node,
 };
 
 const Scoresheet = (props: Props) => {

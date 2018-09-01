@@ -2,7 +2,7 @@
 import React from "react";
 
 type Props = {
-  sign: string
+  sign: string,
 };
 
 function Icon(props: Props) {

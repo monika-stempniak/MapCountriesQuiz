@@ -5,14 +5,14 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:jest/recommended",
     "plugin:flowtype/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
   ],
   env: {
     node: true,
-    browser: true
+    browser: true,
   },
   globals: {
-    fetch: false
+    fetch: false,
   },
   rules: {
     "comma-dangle": ["error", "always-multiline"],
@@ -22,23 +22,17 @@ module.exports = {
     "react/jsx-filename-extension": [
       1,
       {
-        extensions: [".js", ".jsx"]
-      }
+        extensions: [".js", ".jsx"],
+      },
     ],
     "react/jsx-one-expression-per-line": [
       {
-        allow: "literal"
-      }
+        allow: "literal",
+      },
     ],
     "react/button-has-type": "off",
     "no-console": "warn",
     "import/prefer-default-export": "off",
     "react/destructuring-assignment": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        trailingComma: "all"
-      }
-    ]
-  }
+  },
 };

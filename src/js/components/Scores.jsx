@@ -7,7 +7,7 @@ type Props = {
   code: string,
   capital: string,
   flag: string,
-  userAnswer: boolean
+  userAnswer: boolean,
 };
 
 const Scores = (props: Props) => {

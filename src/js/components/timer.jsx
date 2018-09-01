@@ -5,12 +5,12 @@ type State = {
   minutes: number,
   seconds: number,
   isRunning: boolean,
-  intervalId: IntervalID
+  intervalId: IntervalID,
 };
 
 type Props = {
   getTime: (timeOut: boolean) => void,
-  isStartClicked: boolean
+  isStartClicked: boolean,
 };
 
 class Timer extends React.Component<Props, State> {
@@ -18,7 +18,7 @@ class Timer extends React.Component<Props, State> {
     minutes: 0,
     seconds: 10,
     isRunning: false,
-    intervalId: setInterval(() => {})
+    intervalId: setInterval(() => {}),
   };
 
   componentWillUnmount() {
@@ -34,18 +34,18 @@ class Timer extends React.Component<Props, State> {
       this.setState({
         minutes: 0,
         seconds: 0,
-        isRunning: false
+        isRunning: false,
       });
       clearInterval(intervalId);
       getTime(true);
     } else {
       this.setState({
-        seconds: seconds - 1
+        seconds: seconds - 1,
       });
       if (seconds <= 0 && minutes !== 0) {
         this.setState({
           minutes: minutes - 1,
-          seconds: 59
+          seconds: 59,
         });
       }
     }
@@ -62,7 +62,7 @@ class Timer extends React.Component<Props, State> {
       const interval = 1000;
       this.setState({
         intervalId: setInterval(this.tick, interval),
-        isRunning: true
+        isRunning: true,
       });
     }
   }

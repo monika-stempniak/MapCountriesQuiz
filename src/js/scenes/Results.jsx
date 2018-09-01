@@ -9,7 +9,7 @@ import Header from "../components/Header";
 import {
   addUserName,
   fetchCountries,
-  addUserAnswers
+  addUserAnswers,
 } from "../actions/userAction";
 
 // type Result = {
@@ -25,7 +25,7 @@ type Props = {
   userName: string,
   countries: Array<any>,
   userAnswers: Array<any>,
-  history: Array<string>
+  history: Array<string>,
 };
 
 const Results = ({ userName, countries, userAnswers, history }: Props) => {
@@ -75,7 +75,7 @@ const Results = ({ userName, countries, userAnswers, history }: Props) => {
 const mapStateToProps = state => ({
   userName: state.user.name,
   countries: state.user.countries,
-  userAnswers: state.user.answers
+  userAnswers: state.user.answers,
 });
 
 export default connect(
