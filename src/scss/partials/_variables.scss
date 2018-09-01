@@ -1,6 +1,6 @@
-$color-main: #233e55;
-$color-bg: #eee;
-$color-hover: #dcce06;
+$color-marine: #233e55;
+$color-light-gray: #eee;
+$color-mustard: #dcce06;
 $color-good: #90aa0d;
 $color-bad: #e34141;
 $color-gray: #ccc;
@@ -15,16 +15,21 @@ $color-gray: #ccc;
   padding: 10px 40px;
   border-radius: 10px;
   border: none;
-  background-color: $color-hover;
+  background-color: $color-mustard;
   font-size: 1.3rem;
   text-transform: uppercase;
-  font-family: 'Black Ops One', cursive;
+  font-family: "Black Ops One", cursive;
   outline: none;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 %btn-hover {
-  background-color: $color-main;
-  color: $color-bg;
+  background-color: $color-marine;
+  color: $color-light-gray;
   cursor: pointer;
+}
+
+%section-header {
+  margin: 10px 0;
+  font-size: 1.3rem;
 }
