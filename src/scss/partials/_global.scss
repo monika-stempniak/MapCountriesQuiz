@@ -12,8 +12,13 @@ body {
   font-family: "Black Ops One", cursive;
 }
 
+.app__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .container {
-  width: 1200px;
+  width: 1000px;
   margin: 0 auto;
   text-align: center;
 }
