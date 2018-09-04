@@ -2,36 +2,43 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-}
 
-.links {
-  display: flex;
-  justify-content: flex-end;
-
-  &-link {
-    padding: 10px 20px;
-    text-decoration: none;
-    color: black;
-
-    &:visited {
-      color: black;
-    }
-
-    &:active {
-      color: black;
-    }
-
-    &:hover {
-      background: $color-bg;
-    }
-
-    &.links-link--disabled {
-      cursor: not-allowed;
-      color: $color-gray;
-    }
+  &__nav-container {
+    text-align: right;
   }
 
-  .active {
-    background-color: $color-hover;
+  &__nav {
+    display: flex;
+    min-height: 40px;
+
+    &-link {
+      padding: 0 20px;
+      text-decoration: none;
+      color: black;
+      line-height: 40px;
+      height: 100%;
+      display: inline-block;
+
+      &:visited {
+        color: black;
+      }
+
+      &:active {
+        color: black;
+      }
+
+      &:hover {
+        background: $color-light-gray;
+      }
+
+      &.disabled {
+        cursor: not-allowed;
+        color: $color-gray;
+      }
+
+      &.active {
+        background-color: $color-mustard;
+      }
+    }
   }
 }
