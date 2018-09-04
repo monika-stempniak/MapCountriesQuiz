@@ -3,74 +3,74 @@
   height: 80%;
   @include flexbox(center, center);
 
-  .map-container {
+  &__container {
     margin: 0 auto;
     width: 80%;
     height: 90%;
-    background-color: $color-main;
+    background-color: $color-marine;
     border-radius: 10px;
     @include flexbox(space-between, center);
     flex-direction: row-reverse;
     overflow: hidden;
+  }
 
-    .map-svg-wrapper {
-      padding: 0 5%;
-      height: 100%;
-      @include flexbox(center, center);
+  &__svg-wrapper {
+    padding: 0 5%;
+    height: 100%;
+    @include flexbox(center, center);
+  }
+
+  &__svg {
+    height: 100%;
+    width: 100%;
+    transition: 0.5s;
+  }
+
+  &__country {
+    fill: $color-gray;
+    fill-opacity: 1;
+    stroke: $color-marine;
+    stroke-opacity: 1;
+    stroke-width: 0.5;
+    transition: 0.3s;
+
+    &:hover {
+      fill: $color-mustard;
     }
+  }
 
-    .map-svg {
-      height: 100%;
-      width: 100%;
-      transition: .5s;
+  &__button-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
 
-      .land {
-        fill: $color-gray;
-        fill-opacity: 1;
-        stroke: $color-main;
-        stroke-opacity: 1;
-        stroke-width:0.5;
-        transition: .3s;
+  &__button {
+    z-index: 1;
+    padding: 10px;
+    margin: 0 0 10px 10px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background-color: $color-light-gray;
+    outline: none;
+  }
 
-        &:hover {
-          fill: $color-hover;
-        }
-      }
-    }
+  &__country-name {
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    overflow: visible;
+    position: fixed;
+    top: 200px;
+    left: 200px;
+    border-radius: 10px;
+    z-index: 3;
+    display: none;
 
-    .map-buttons {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-    }
-
-    .btn-map {
-      z-index: 1;
+    &.is-hovered {
       padding: 10px;
-      margin: 0 0 10px 10px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      background-color: $color-bg;
-      outline: none;
-    }
-
-    .country-name {
-      background: rgba(255,255,255,0.8);
-      font-size: 1.2rem;
-      overflow: visible;
-      position: fixed;
-      top: 200px;
-      left: 200px;
-      border-radius: 10px;
-      z-index: 3;
-      display: none;
-
-      &.isHovered {
-        padding: 10px;
-        display: block;
-      }
+      display: block;
     }
   }
 }
