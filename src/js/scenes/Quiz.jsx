@@ -1,34 +1,34 @@
 // @flow
-import * as React from 'react'
-import Map from './Map'
-import Topbar  from './Topbar'
-import countries from '../helpers/countries'
+import * as React from "react";
+import Map from "./Map";
+import Topbar from "./Topbar";
+import countries from "../helpers/countries";
 
 type State = {
   userAnswer: string,
-}
+};
 
-type Props = {}
+type Props = {};
 
 // type Country = {id: string, title: string, d: string}
 
 class Quiz extends React.Component<Props, State> {
   state = {
-    userAnswer: '',
-  }
+    userAnswer: "",
+  };
 
   handleClick = (countryId: string) => {
     this.setState({
       userAnswer: countryId,
-    })
-  }
+    });
+  };
 
   // prepareListOfCountriesId = (countries: Array<Country>) : Array<string>  => {
   //   return countries.map(country => country.id)
   // }
 
   render() {
-    const { userAnswer } = this.state
+    const { userAnswer } = this.state;
 
     return (
       <div className="quiz">
@@ -38,8 +38,8 @@ class Quiz extends React.Component<Props, State> {
         />
         <Map clickMap={this.handleClick} countries={countries} />
       </div>
-    )
+    );
   }
 }
 
-export default Quiz
+export default Quiz;

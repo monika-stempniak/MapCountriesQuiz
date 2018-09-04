@@ -252,8 +252,8 @@ class Topbar extends React.Component<Props, State> {
                       />
                     </td>
                     <td>{`${countries.length}/3`}</td>
-                    <td className="good">{goodAnswer}</td>
-                    <td className="bad">{badAnswer}</td>
+                    <td className="topbar__table--good">{goodAnswer}</td>
+                    <td className="topbar__table--bad">{badAnswer}</td>
                   </tr>
                 </tbody>
               </table>
