@@ -99,11 +99,5 @@
     padding: 0 5px;
   }
 
-  &--good {
-    color: $color-good;
-  }
-
-  &--bad {
-    color: $color-bad;
-  }
+  @include score(topbar__table);
 }

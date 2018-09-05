@@ -5,10 +5,26 @@ $color-good: #90aa0d;
 $color-bad: #e34141;
 $color-gray: #ccc;
 
+$scores: good, bad;
+
 @mixin flexbox($justify-content, $align-items) {
   display: flex;
   justify-content: $justify-content;
   align-items: $align-items;
+}
+
+@mixin score($selector) {
+  @each $score in $scores {
+    @if $score == good {
+      .#{$selector}--#{$score} {
+        color: $color-good;
+      }
+    } @else {
+      .#{$selector}--#{$score} {
+        color: $color-bad;
+      }
+    }
+  }
 }
 
 %btn {

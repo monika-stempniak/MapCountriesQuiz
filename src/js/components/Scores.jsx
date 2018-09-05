@@ -13,6 +13,10 @@ type Props = {
 const Scores = (props: Props) => {
   const { ordinalNumber, country, code, capital, flag, userAnswer } = props;
 
+  const answer = userAnswer === true ? "true" : "false";
+
+  const classAnswer = answer === "true" ? "good" : "bad";
+
   return (
     <tr>
       <td>{ordinalNumber}</td>
@@ -22,7 +26,7 @@ const Scores = (props: Props) => {
       <td>
         <img src={flag} alt={`${country}'s flag`} width="70" />
       </td>
-      <td>{userAnswer}</td>
+      <td className={`scores--${classAnswer}`}>{answer}</td>
     </tr>
   );
 };
