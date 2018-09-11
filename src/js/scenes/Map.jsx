@@ -75,7 +75,7 @@ class Map extends React.Component<Props, State> {
 
     return (
       <section className="map">
-        <figure className="map__container">
+        <figure className="container map__container">
           <figcaption className="map__title visuallyhidden">
             World map
           </figcaption>

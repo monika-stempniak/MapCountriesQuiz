@@ -24,7 +24,7 @@ const Routing = (props: Props) => {
 
   return (
     <Router>
-      <div className="app__container">
+      <div>
         <div className="routing">
           <nav className="routing__nav">
             <div className="container routing__nav-container">
@@ -50,18 +50,18 @@ const Routing = (props: Props) => {
               </NavLink>
             </div>
           </nav>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route
-              path="/quiz"
-              render={() => (userName ? <Quiz /> : <Redirect to="/" />)}
-            />
-            <Route
-              path="/results"
-              render={() => (userName ? <Results /> : <Redirect to="/" />)}
-            />
-          </Switch>
         </div>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route
+            path="/quiz"
+            render={() => (userName ? <Quiz /> : <Redirect to="/" />)}
+          />
+          <Route
+            path="/results"
+            render={() => (userName ? <Results /> : <Redirect to="/" />)}
+          />
+        </Switch>
       </div>
     </Router>
   );
