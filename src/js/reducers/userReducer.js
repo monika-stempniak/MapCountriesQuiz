@@ -1,10 +1,10 @@
-import { USER_NAME,  USER_ANSWERS, FETCH_COUNTRIES } from '../actions/types'
+import { USER_NAME, USER_ANSWERS, FETCH_COUNTRIES } from "../actions/types";
 
 const initialState = {
-  name: '',
+  name: "",
   countries: [],
   answers: [],
-}
+};
 
 function addAnswers(state, answer) {
   const copyStateAnswers = [...state.answers];
@@ -16,24 +16,24 @@ function addAnswers(state, answer) {
   return {
     ...state,
     answers: copyStateAnswers,
-  }
+  };
 }
 
-export default function (state = initialState, action) {
-  switch(action.type) {
+export default function(state = initialState, action) {
+  switch (action.type) {
     case USER_NAME:
       return {
         ...state,
         name: action.payload,
-      }
+      };
     case USER_ANSWERS:
       return addAnswers(state, action.payload);
     case FETCH_COUNTRIES:
       return {
         ...state,
         countries: action.payload,
-      }
+      };
     default:
-    return state
+      return state;
   }
 }
