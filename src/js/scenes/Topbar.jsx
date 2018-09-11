@@ -64,7 +64,7 @@ class Topbar extends React.Component<Props, State> {
     isTimeOut: false,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchCountries();
   }
 
@@ -103,19 +103,17 @@ class Topbar extends React.Component<Props, State> {
     this.hintTimer();
   };
 
-  handleClickStart = () => {
+  handleClick = () => {
     const { countries } = this.state;
     const { name, capital } = this.state.country;
     this.setState(
       {
-        isStartClicked: true,
         country: {
-          code: countries[0].alpha2Code,
-          name: countries[0].name,
-          flag: countries[0].flag,
-          capital: countries[0].capital,
+          code: countries[1].alpha2Code,
+          name: countries[1].name,
+          flag: countries[1].flag,
+          capital: countries[1].capital,
         },
-        isHintLinkVisible: true,
       },
       () => {
         this.setState({
@@ -131,6 +129,28 @@ class Topbar extends React.Component<Props, State> {
     this.setState({ countries });
   };
 
+  handleClickStart = () => {
+    const { countries } = this.state;
+    const { name, capital } = this.state.country;
+    countries.length !== 0 &&
+      this.setState(
+        {
+          isStartClicked: true,
+          country: {
+            code: countries[0].alpha2Code,
+            name: countries[0].name,
+            flag: countries[0].flag,
+            capital: countries[0].capital,
+          },
+          isHintLinkVisible: true,
+        },
+        () =>
+          this.setState({
+            hintMessage: capital ? `Capital: ${capital}` : `Country: ${name}`,
+          })
+      );
+  };
+
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
     const {
       isStartClicked,
@@ -139,35 +159,31 @@ class Topbar extends React.Component<Props, State> {
       countries,
       isTimeOut,
     } = this.state;
-    const { code } = this.state.country;
     const { answer } = this.props;
     if (nextProps.countries) {
       this.setState({
         countries: [...nextProps.countries],
       });
     }
-    if (nextProps.answer && isStartClicked) {
+    if (isStartClicked) {
       this.handleDeleteCountry();
       const countriesArrayLength = countries.length - 1;
       if (isTimeOut === true || countriesArrayLength === 0) {
         this.handleStopAndResetQuiz();
       } else {
-        this.handleClickStart();
+        this.handleClick();
       }
+      const code = countries[0].alpha2Code;
       if (nextProps.answer === code && answer !== nextProps.answer) {
-        this.setState(
-          {
-            goodAnswer: goodAnswer + 1,
-          },
-          () => this.props.addUserAnswers({ code, answer: true })
-        );
+        this.setState({
+          goodAnswer: goodAnswer + 1,
+        });
+        this.props.addUserAnswers({ code, answer: true });
       } else {
-        this.setState(
-          {
-            badAnswer: badAnswer + 1,
-          },
-          () => this.props.addUserAnswers({ code, answer: false })
-        );
+        this.setState({
+          badAnswer: badAnswer + 1,
+        });
+        this.props.addUserAnswers({ code, answer: false });
       }
     }
   }
