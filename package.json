@@ -12,7 +12,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "precommit": "pretty-quick --staged"
+    "pretty:q": "cd src && pretty-quick --staged",
+    "format:prettier": "cd src && prettier --write '**/*.{js,jsx,css,sass,scss,json}'",
+    "lint:style": "cd src && stylelint '**/*.{css,scss}'"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -54,13 +56,17 @@
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
+    "pre-commit": "^1.2.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-map-interaction": "^1.2.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "stylelint": "^9.5.0",
+    "stylelint-config-recommended": "^2.1.0",
+    "stylelint-scss": "^3.3.0"
   },
   "jest": {
     "setupFiles": [
@@ -72,5 +78,9 @@
     "moduleNameMapper": {
       "^.+\\.(css|scss)$": "identity-obj-proxy"
     }
-  }
+  },
+  "pre-commit": [
+    "pretty:q",
+    "lint:style"
+  ]
 }
