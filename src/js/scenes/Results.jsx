@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import Scoresheet from "../components/Scoresheet";
 import Scores from "../components/Scores";
 import Button from "../components/Button";
-import Header from "../components/Header";
+import Header from "../components/header";
 import {
   addUserName,
   fetchCountries,

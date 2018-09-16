@@ -2,8 +2,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import Header from "../components/Header";
-import Timer from "../components/Timer";
+import Header from "../components/header";
+import Timer from "../components/timer";
 import Button from "../components/Button";
 import {
   addUserName,
