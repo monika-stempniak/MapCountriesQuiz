@@ -70,6 +70,9 @@ class Topbar extends React.Component<Props, State> {
 
   getTimer = (timeOut: boolean) => {
     this.setState({ isTimeOut: timeOut });
+    if (this.state.isTimeOut) {
+      this.handleStopAndResetQuiz();
+    }
   };
 
   handleStopAndResetQuiz = () => {
@@ -140,13 +143,7 @@ class Topbar extends React.Component<Props, State> {
   };
 
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    const {
-      isStartClicked,
-      goodAnswer,
-      badAnswer,
-      countries,
-      isTimeOut,
-    } = this.state;
+    const { isStartClicked, goodAnswer, badAnswer, countries } = this.state;
     const { answer } = this.props;
     if (nextProps.countries) {
       this.setState({
@@ -156,7 +153,7 @@ class Topbar extends React.Component<Props, State> {
     if (isStartClicked) {
       this.handleDeleteCountry();
       const countriesArrayLength = countries.length - 1;
-      if (isTimeOut === true || countriesArrayLength === 0) {
+      if (countriesArrayLength === 0) {
         this.handleStopAndResetQuiz();
       } else {
         this.handleClick();
