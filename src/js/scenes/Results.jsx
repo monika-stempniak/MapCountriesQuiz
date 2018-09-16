@@ -30,20 +30,24 @@ type Props = {
 
 const Results = ({ userName, countries, userAnswers, history }: Props) => {
   const prepareResults = () => {
+    let answer: string | boolean;
     return (
       <Scoresheet userName={userName}>
         {countries &&
-          countries.map((country, i) => (
-            <Scores
-              key={country.alpha2Code}
-              ordinalNumber={i + 1}
-              country={country.name}
-              code={country.alpha2Code}
-              capital={country.capital}
-              flag={country.flag}
-              userAnswer={userAnswers[i].answer}
-            />
-          ))}
+          countries.map((country, i) => {
+            answer = userAnswers[i] === undefined ? "" : userAnswers[i].answer;
+            return (
+              <Scores
+                key={country.alpha2Code}
+                ordinalNumber={i + 1}
+                country={country.name}
+                code={country.alpha2Code}
+                capital={country.capital}
+                flag={country.flag}
+                userAnswer={answer}
+              />
+            );
+          })}
       </Scoresheet>
     );
   };
