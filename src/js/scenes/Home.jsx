@@ -2,7 +2,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import Header from "../components/Header";
+import Header from "../components/header";
 import Button from "../components/Button";
 import { addUserName } from "../actions/userAction";
 
