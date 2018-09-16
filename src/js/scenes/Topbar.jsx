@@ -104,23 +104,16 @@ class Topbar extends React.Component<Props, State> {
   };
 
   handleClick = () => {
-    const { countries } = this.state;
-    const { name, capital } = this.state.country;
-    this.setState(
-      {
-        country: {
-          code: countries[1].alpha2Code,
-          name: countries[1].name,
-          flag: countries[1].flag,
-          capital: countries[1].capital,
-        },
+    const { alpha2Code, name, flag, capital, region } = this.state.countries[1];
+    this.setState({
+      country: {
+        code: alpha2Code,
+        name,
+        flag,
+        capital,
       },
-      () => {
-        this.setState({
-          hintMessage: capital ? `Capital: ${capital}` : `Country: ${name}`,
-        });
-      }
-    );
+      hintMessage: capital ? `Capital: ${capital}` : `Region: ${region}`,
+    });
   };
 
   handleDeleteCountry = () => {
@@ -131,24 +124,19 @@ class Topbar extends React.Component<Props, State> {
 
   handleClickStart = () => {
     const { countries } = this.state;
-    const { name, capital } = this.state.country;
+    const { alpha2Code, name, flag, capital, region } = this.state.countries[0];
     countries.length !== 0 &&
-      this.setState(
-        {
-          isStartClicked: true,
-          country: {
-            code: countries[0].alpha2Code,
-            name: countries[0].name,
-            flag: countries[0].flag,
-            capital: countries[0].capital,
-          },
-          isHintLinkVisible: true,
+      this.setState({
+        isStartClicked: true,
+        country: {
+          code: alpha2Code,
+          name,
+          flag,
+          capital,
         },
-        () =>
-          this.setState({
-            hintMessage: capital ? `Capital: ${capital}` : `Country: ${name}`,
-          })
-      );
+        isHintLinkVisible: true,
+        hintMessage: capital ? `Capital: ${capital}` : `Region: ${region}`,
+      });
   };
 
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
@@ -173,7 +161,7 @@ class Topbar extends React.Component<Props, State> {
       } else {
         this.handleClick();
       }
-      const code = countries[0].alpha2Code;
+      const code: string = countries[0].alpha2Code;
       if (nextProps.answer === code && answer !== nextProps.answer) {
         this.setState({
           goodAnswer: goodAnswer + 1,
