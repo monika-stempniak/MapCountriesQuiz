@@ -38,7 +38,8 @@ function setCountries(countries, dispatch) {
 }
 
 export const fetchCountries = () => dispatch => {
-  const url = "https://restcountries.eu/rest/v2/all";
+  const url =
+    "https://restcountries.eu/rest/v2/all?fields=name;alpha2Code;capital;region;subregion;flag";
 
   // setCountries(mock, dispatch);
 
