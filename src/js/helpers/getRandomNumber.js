@@ -1,3 +1,3 @@
-const getRandomNumber = (array) => Math.floor(Math.random() * array.length)
+const getRandomNumber = array => Math.floor(Math.random() * array.length);
 
-export default getRandomNumber
+export default getRandomNumber;
