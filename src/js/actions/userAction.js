@@ -1,6 +1,6 @@
 import { USER_NAME, USER_ANSWERS, FETCH_COUNTRIES } from "./types";
 import getRandomNumber from "../helpers/getRandomNumber";
-// import mock from "./responseMock";
+import mock from "./testMock";
 
 export const addUserName = name => dispatch =>
   dispatch({
@@ -38,10 +38,11 @@ function setCountries(countries, dispatch) {
 }
 
 export const fetchCountries = () => dispatch => {
-  const url =
-    "https://restcountries.eu/rest/v2/all?fields=name;alpha2Code;capital;region;subregion;flag";
+  // const url =
+  //   "https://restcountries.eu/rest/v2/all?fields=name;alpha2Code;capital;region;subregion;flag";
+  const url = "";
 
-  // setCountries(mock, dispatch);
+  setCountries(mock, dispatch);
 
   fetch(url)
     .then(response => {
