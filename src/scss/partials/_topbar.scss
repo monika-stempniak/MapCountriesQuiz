@@ -1,8 +1,6 @@
 .topbar {
   width: 100%;
   background-color: $color-light-gray;
-  @include flexbox(space-around, center);
-  flex-direction: column;
   z-index: 2;
 
   &__content {
@@ -44,6 +42,7 @@
     @include flexbox(flex-start, center);
     color: $color-marine;
     font-size: 0.7rem;
+    clear: left;
   }
 
   &__button--hint {
@@ -69,6 +68,7 @@
     @extend %btn;
     width: 80%;
     margin: 10px 0;
+    float: left;
 
     &:hover {
       @extend %btn-hover;
@@ -100,4 +100,26 @@
   }
 
   @include score(topbar__table);
+}
+
+// -----------------------
+// ----- TOPBAR REGIONS ------
+// -----------------------
+
+.topbar__regions {
+  @include flexbox(space-around, center);
+  flex-wrap: wrap;
+  width: 100%;
+
+  &-region {
+    padding: 0 10px;
+    font-size: 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: $color-marine;
+
+    &:hover {
+      color: $color-mustard;
+    }
+  }
 }
