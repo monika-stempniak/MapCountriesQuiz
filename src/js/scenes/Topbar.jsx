@@ -26,12 +26,15 @@ type State = {
   isHintVisible: boolean,
   hintMessage: string,
   isTimeOut: boolean,
+  isStartDisable: boolean,
 };
 
 type Props = {
   answer: string,
   userName: string,
-  fetchCountries: () => () => {
+  fetchCountries: (
+    region: string
+  ) => () => {
     type: string,
     payload: Array<any>,
   },
@@ -62,11 +65,12 @@ class Topbar extends React.Component<Props, State> {
     isHintVisible: false,
     hintMessage: "",
     isTimeOut: false,
+    isStartDisable: true,
   };
 
-  componentDidMount() {
-    this.props.fetchCountries();
-  }
+  // componentDidMount() {
+  //   this.props.fetchCountries();
+  // }
 
   getTimer = (timeOut: boolean) => {
     this.setState({ isTimeOut: timeOut });
@@ -92,6 +96,7 @@ class Topbar extends React.Component<Props, State> {
       isHintVisible: false,
       hintMessage: "",
       isTimeOut: false,
+      isStartDisable: true,
     });
   };
 
@@ -106,7 +111,7 @@ class Topbar extends React.Component<Props, State> {
     this.hintTimer();
   };
 
-  handleClick = () => {
+  handleClickCountry = () => {
     const { alpha2Code, name, flag, capital, region } = this.state.countries[1];
     this.setState({
       country: {
@@ -142,6 +147,43 @@ class Topbar extends React.Component<Props, State> {
       });
   };
 
+  handleClickRegion = (e: SyntheticMouseEvent<HTMLButtonElement>) => {
+    console.log("clicked region:", e.currentTarget.textContent);
+    this.props.fetchCountries(e.currentTarget.textContent);
+    this.setState({ isStartDisable: false });
+  };
+
+  handleKeyPress = (e: SyntheticMouseEvent<HTMLButtonElement>) => {
+    console.log("pressed region:", e.currentTarget.textContent);
+  };
+
+  chooseRegion = () => {
+    const regions = [
+      "All regions",
+      "Africa",
+      "Americas",
+      "Asia",
+      "Europe",
+      "Oceania",
+    ];
+
+    const levels = regions.map(region => {
+      return (
+        <span
+          className="topbar__regions-region"
+          key={region}
+          onClick={this.handleClickRegion}
+          onKeyPress={this.handleKeyPress}
+          role="button"
+          tabIndex={0}
+        >
+          {region}
+        </span>
+      );
+    });
+    return levels;
+  };
+
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
     const { isStartClicked, goodAnswer, badAnswer, countries } = this.state;
     const { answer } = this.props;
@@ -156,7 +198,7 @@ class Topbar extends React.Component<Props, State> {
       if (countriesArrayLength === 0) {
         this.handleStopAndResetQuiz();
       } else {
-        this.handleClick();
+        this.handleClickCountry();
       }
       const code: string = countries[0].alpha2Code;
       if (nextProps.answer === code && answer !== nextProps.answer) {
@@ -182,6 +224,7 @@ class Topbar extends React.Component<Props, State> {
       isStartClicked,
       goodAnswer,
       badAnswer,
+      isStartDisable,
     } = this.state;
 
     const { flag, name } = this.state.country;
@@ -203,6 +246,7 @@ class Topbar extends React.Component<Props, State> {
               <Button
                 btnClass="topbar__button--start"
                 handleClick={this.handleClickStart}
+                isDisable={isStartDisable}
               >
                 Start
               </Button>
@@ -260,6 +304,7 @@ class Topbar extends React.Component<Props, State> {
               </table>
             </div>
           </div>
+          <div className="topbar__regions">{this.chooseRegion()}</div>
         </section>
       </Header>
     );
