@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Header from "../components/header";
 import Button from "../components/Button";
-import { addUserName } from "../actions/userAction";
+import { addUserName } from "../actions/userDataAction";
 
 type State = {
   name: string,

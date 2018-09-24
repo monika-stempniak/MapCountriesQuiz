@@ -12,7 +12,8 @@ import Home from "./Home";
 import Quiz from "./Quiz";
 import Results from "./Results";
 // import AppWrapper from "../HOC/AppWrapper";
-import { addUserName, addUserAnswers } from "../actions/userAction";
+import { addUserName } from "../actions/userDataAction";
+import { addUserAnswers } from "../actions/userAnswersAction";
 
 type Props = {
   userName: string,
@@ -79,7 +80,7 @@ const Routing = (props: Props) => {
 
 const mapStateToProps = state => ({
   userName: state.user.name,
-  userAnswers: state.user.answers,
+  userAnswers: state.results.answers,
 });
 
 export default connect(
