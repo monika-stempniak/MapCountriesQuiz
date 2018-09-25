@@ -1,3 +1,25 @@
-export const USER_NAME = "USER_NAME";
-export const USER_ANSWERS = "USER_ANSWERS";
-export const FETCH_COUNTRIES = "FETCH_COUNTRIES";
+// @flow
+
+type userDataType = {
+  ADD: string,
+};
+
+type userAnswersType = {
+  ADD: string,
+};
+
+type countriesType = {
+  GET: string,
+};
+
+export const USER_NAME: userDataType = {
+  ADD: "USER_NAME:ADD",
+};
+
+export const USER_ANSWERS: userAnswersType = {
+  ADD: "USER_ANSWERS:ADD",
+};
+
+export const FETCH_COUNTRIES: countriesType = {
+  GET: "FETCH_COUNTRIES:GET",
+};

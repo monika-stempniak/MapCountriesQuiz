@@ -6,25 +6,15 @@ import Scoresheet from "../components/Scoresheet";
 import Scores from "../components/Scores";
 import Button from "../components/Button";
 import Header from "../components/header";
-import {
-  addUserName,
-  fetchCountries,
-  addUserAnswers,
-} from "../actions/userAction";
-
-// type Result = {
-//   id: number,
-//   country: string,
-//   code: string,
-//   flag: string,
-//   capital: string,
-//   answer: string,
-// }
+import { addUserName } from "../actions/userDataAction";
+import { fetchCountries } from "../actions/countriesAction";
+import { addUserAnswers } from "../actions/userAnswersAction";
+import type { Countries, Answers } from "../flow/types.d";
 
 type Props = {
   userName: string,
-  countries: Array<any>,
-  userAnswers: Array<any>,
+  countries: Array<Countries>,
+  userAnswers: Array<Answers>,
   history: Array<string>,
 };
 
@@ -78,8 +68,8 @@ const Results = ({ userName, countries, userAnswers, history }: Props) => {
 
 const mapStateToProps = state => ({
   userName: state.user.name,
-  countries: state.user.countries,
-  userAnswers: state.user.answers,
+  countries: state.countries.fetched,
+  userAnswers: state.results.answers,
 });
 
 export default connect(

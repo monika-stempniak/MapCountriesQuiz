@@ -10,8 +10,6 @@ type State = {
 
 type Props = {};
 
-// type Country = {id: string, title: string, d: string}
-
 class Quiz extends React.Component<Props, State> {
   state = {
     userAnswer: "",
@@ -23,19 +21,12 @@ class Quiz extends React.Component<Props, State> {
     });
   };
 
-  // prepareListOfCountriesId = (countries: Array<Country>) : Array<string>  => {
-  //   return countries.map(country => country.id)
-  // }
-
   render() {
     const { userAnswer } = this.state;
 
     return (
       <div className="quiz">
-        <Topbar
-          answer={userAnswer}
-          // listId={this.prepareListOfCountriesId(countries)}
-        />
+        <Topbar answer={userAnswer} />
         <Map clickMap={this.handleClick} countries={countries} />
       </div>
     );

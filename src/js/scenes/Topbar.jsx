@@ -5,14 +5,13 @@ import { withRouter } from "react-router-dom";
 import Header from "../components/header";
 import Timer from "../components/timer";
 import Button from "../components/Button";
-import {
-  addUserName,
-  addUserAnswers,
-  fetchCountries,
-} from "../actions/userAction";
+import { addUserName } from "../actions/userDataAction";
+import { fetchCountries } from "../actions/countriesAction";
+import { addUserAnswers } from "../actions/userAnswersAction";
+import type { Countries } from "../flow/types.d";
 
 type State = {
-  countries: Array<any>,
+  countries: Array<Countries>,
   country: {
     code: string,
     name: string,
@@ -36,9 +35,9 @@ type Props = {
     region: string
   ) => () => {
     type: string,
-    payload: Array<any>,
+    payload: Array<Countries>,
   },
-  countries: Array<any>, //eslint-disable-line
+  countries: Array<Countries>, //eslint-disable-line
   history: Array<string>,
   addUserAnswers: ({ code: string, answer: boolean }) => () => {
     type: string,
@@ -67,10 +66,6 @@ class Topbar extends React.Component<Props, State> {
     isTimeOut: false,
     isStartDisable: true,
   };
-
-  // componentDidMount() {
-  //   this.props.fetchCountries();
-  // }
 
   getTimer = (timeOut: boolean) => {
     this.setState({ isTimeOut: timeOut });
@@ -313,7 +308,7 @@ class Topbar extends React.Component<Props, State> {
 
 const mapStateToProps = state => ({
   userName: state.user.name,
-  countries: state.user.countries,
+  countries: state.countries.fetched,
 });
 
 export default connect(

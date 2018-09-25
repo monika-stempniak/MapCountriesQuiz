@@ -1,6 +1,10 @@
 import { combineReducers } from "redux";
-import userReducer from "./userReducer";
+import userDataReducer from "./userDataReducer";
+import countriesReducer from "./countriesReducer";
+import userAnswersReducer from "./userAnswersReducer";
 
 export default combineReducers({
-  user: userReducer,
+  user: userDataReducer,
+  countries: countriesReducer,
+  results: userAnswersReducer,
 });
