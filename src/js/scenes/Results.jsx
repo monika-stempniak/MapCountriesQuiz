@@ -55,7 +55,7 @@ const Results = ({ userName, countries, userAnswers, history }: Props) => {
         >
           Play again
         </Button>
-        <h2 className="results__header">Results</h2>
+        <h2 className="results__header .visuallyhidden">Results</h2>
       </Header>
       <section className="results__content">
         <hr />

@@ -54,8 +54,9 @@ class Home extends React.Component<Props, State> {
     return (
       <div className="home">
         <Header>
-          <h2 className="home__header">Welcome</h2>
-          <h3 className="home__header">Please, enter your name to proceed</h3>
+          <h2 className="home__header">
+            Please, enter your name to start the quiz
+          </h2>
         </Header>
         <section className="home__content">
           <dir className="container">
