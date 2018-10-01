@@ -6,8 +6,9 @@ import Header from "../components/header";
 import Timer from "../components/timer";
 import Button from "../components/Button";
 import { addUserName } from "../actions/userDataAction";
-import { fetchCountries } from "../actions/countriesAction";
+import fetchCountries from "../actions/countriesAction";
 import { addUserAnswers } from "../actions/userAnswersAction";
+import { showSnackbarMessage } from "../actions/snackbarAction";
 import type { Countries } from "../flow/types.d";
 
 type State = {
@@ -46,6 +47,7 @@ type Props = {
       answer: boolean,
     }>,
   },
+  showSnackbarMessage: (messageContent: string, messageType: string) => void,
 };
 
 class Topbar extends React.Component<Props, State> {
@@ -145,6 +147,10 @@ class Topbar extends React.Component<Props, State> {
   handleClickRegion = (e: SyntheticMouseEvent<HTMLButtonElement>) => {
     console.log("clicked region:", e.currentTarget.textContent);
     this.props.fetchCountries(e.currentTarget.textContent);
+    this.props.showSnackbarMessage(
+      `You've successfully chosen ${e.currentTarget.textContent} region`,
+      "success"
+    );
     this.setState({ isStartDisable: false });
   };
 
@@ -313,5 +319,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addUserName, addUserAnswers, fetchCountries }
+  { addUserName, addUserAnswers, fetchCountries, showSnackbarMessage }
 )(withRouter(Topbar));

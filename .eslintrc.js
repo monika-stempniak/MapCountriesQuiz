@@ -34,5 +34,6 @@ module.exports = {
     "no-console": "warn",
     "import/prefer-default-export": "off",
     "react/destructuring-assignment": "off",
+    "no-debugger": "off",
   },
 };

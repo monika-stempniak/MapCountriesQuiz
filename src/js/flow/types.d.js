@@ -12,3 +12,8 @@ export type Answers = {
   code: string,
   answer: boolean,
 };
+
+export type SnackbarMessage = {
+  content: string,
+  type: string,
+};

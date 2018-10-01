@@ -7,7 +7,7 @@ import Scores from "../components/Scores";
 import Button from "../components/Button";
 import Header from "../components/header";
 import { addUserName } from "../actions/userDataAction";
-import { fetchCountries } from "../actions/countriesAction";
+import fetchCountries from "../actions/countriesAction";
 import { addUserAnswers } from "../actions/userAnswersAction";
 import type { Countries, Answers } from "../flow/types.d";
 
