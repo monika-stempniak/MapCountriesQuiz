@@ -68,7 +68,7 @@ const Results = ({ userName, countries, userAnswers, history }: Props) => {
 
 const mapStateToProps = state => ({
   userName: state.user.name,
-  countries: state.countries.fetched,
+  countries: state.countries.fetched.countries,
   userAnswers: state.results.answers,
 });
 

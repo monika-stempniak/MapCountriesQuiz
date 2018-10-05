@@ -10,11 +10,7 @@ type userAnswersType = {
 
 type countriesType = {
   GET: string,
-};
-
-type snackbarType = {
-  POSITIVE: string,
-  NEGATIVE: string,
+  ERROR: string,
 };
 
 export const USER_NAME: userDataType = {
@@ -27,9 +23,5 @@ export const USER_ANSWERS: userAnswersType = {
 
 export const FETCH_COUNTRIES: countriesType = {
   GET: "FETCH_COUNTRIES:GET",
-};
-
-export const SHOW_SNACKBAR: snackbarType = {
-  POSITIVE: "SHOW_SNACKBAR:POSITIVE",
-  NEGATIVE: "SHOW_SNACKBAR:NEGATIVE",
+  ERROR: "FETCH_COUNTRIES:ERROR",
 };

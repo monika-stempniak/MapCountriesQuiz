@@ -1,16 +1,18 @@
 // @flow
 import * as React from "react";
 import { connect } from "react-redux";
-import { showSnackbarMessage } from "../actions/snackbarAction";
-import type { SnackbarMessage } from "../flow/types.d";
 
 type Props = {
-  snackbar: SnackbarMessage, //eslint-disable-line
+  //eslint-disable-next-line
+  snackbar: {
+    message: string,
+    status: string,
+  },
 };
 
 type State = {
   message: string,
-  type: string,
+  status: string,
   timeoutId: TimeoutID,
 };
 
@@ -18,7 +20,7 @@ class Snackbar extends React.Component<Props, State> {
   //tablica
   state = {
     message: "",
-    type: "",
+    status: "",
     timeoutId: setTimeout(() => {}),
   };
 
@@ -30,18 +32,18 @@ class Snackbar extends React.Component<Props, State> {
   resetSnackbar = () => {
     this.setState({
       message: "",
-      type: "",
+      status: "",
     }),
       clearTimeout(this.state.timeoutId);
   };
 
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    const { content, type } = nextProps.snackbar;
-    if (type) {
+    const { message, status } = nextProps.snackbar;
+    if (status) {
       const time = 3500;
       this.setState({
-        message: content,
-        type,
+        message,
+        status,
         timeoutId: setTimeout(this.resetSnackbar, time),
       });
     }
@@ -49,8 +51,8 @@ class Snackbar extends React.Component<Props, State> {
 
   render() {
     return (
-      this.state.type && (
-        <div className={`snackbar snackbar--${this.state.type}`}>
+      this.state.status && (
+        <div className={`snackbar snackbar--${this.state.status}`}>
           {this.state.message}
         </div>
       )
@@ -59,10 +61,7 @@ class Snackbar extends React.Component<Props, State> {
 }
 
 const mapStateToProps = state => ({
-  snackbar: state.snackbar.message,
+  snackbar: state.countries.fetched.snackbar,
 });
 
-export default connect(
-  mapStateToProps,
-  { showSnackbarMessage }
-)(Snackbar);
+export default connect(mapStateToProps)(Snackbar);
