@@ -1,4 +1,6 @@
 .header {
+  @include flexbox(center, center);
+
   &__wrapper {
     width: 100%;
     min-height: 20%;
@@ -17,5 +19,5 @@
 }
 
 .logo {
-  margin-right: 15px;
+  margin-right: 12px;
 }
