@@ -14,14 +14,15 @@ type State = {
   message: string,
   status: string,
   timeoutId: TimeoutID,
+  shouldClose: boolean,
 };
 
 class Snackbar extends React.Component<Props, State> {
-  //tablica
   state = {
     message: "",
     status: "",
     timeoutId: setTimeout(() => {}),
+    shouldClose: false,
   };
 
   componentWillUnmount() {
@@ -37,23 +38,49 @@ class Snackbar extends React.Component<Props, State> {
       clearTimeout(this.state.timeoutId);
   };
 
+  handleClick = (e: SyntheticMouseEvent<HTMLButtonElement>) => {
+    console.log("clicked", e.currentTarget);
+    this.setState({
+      shouldClose: true,
+    });
+    this.resetSnackbar;
+  };
+
+  handleKeyPress = (e: SyntheticMouseEvent<HTMLButtonElement>) => {
+    console.log("pressed region:", e.currentTarget);
+  };
+
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
     const { message, status } = nextProps.snackbar;
     if (status) {
-      const time = 3500;
+      const time = 5500;
       this.setState({
         message,
         status,
         timeoutId: setTimeout(this.resetSnackbar, time),
+        shouldClose: false,
       });
     }
   }
 
   render() {
+    const { status, message, shouldClose } = this.state;
+    const shouldCloseClass = shouldClose ? "close" : "open";
     return (
-      this.state.status && (
-        <div className={`snackbar snackbar--${this.state.status}`}>
-          {this.state.message}
+      status && (
+        <div
+          className={`snackbar snackbar--${status} snackbar--${shouldCloseClass}`}
+        >
+          {message}
+          <span
+            className="snackbar__close-btn"
+            onClick={this.handleClick}
+            onKeyPress={this.handleKeyPress}
+            role="button"
+            tabIndex={0}
+          >
+            x
+          </span>
         </div>
       )
     );
