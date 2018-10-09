@@ -6,7 +6,7 @@ import Header from "../components/header";
 import Timer from "../components/timer";
 import Button from "../components/Button";
 import { addUserName } from "../actions/userDataAction";
-import { fetchCountries } from "../actions/countriesAction";
+import fetchCountries from "../actions/countriesAction";
 import { addUserAnswers } from "../actions/userAnswersAction";
 import type { Countries } from "../flow/types.d";
 
@@ -308,10 +308,14 @@ class Topbar extends React.Component<Props, State> {
 
 const mapStateToProps = state => ({
   userName: state.user.name,
-  countries: state.countries.fetched,
+  countries: state.countries.fetched.countries,
 });
 
 export default connect(
   mapStateToProps,
-  { addUserName, addUserAnswers, fetchCountries }
+  {
+    addUserName,
+    addUserAnswers,
+    fetchCountries,
+  }
 )(withRouter(Topbar));

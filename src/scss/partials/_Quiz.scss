@@ -2,4 +2,5 @@
   height: 95vh;
   @include flexbox(center, center);
   flex-direction: column;
+  position: relative;
 }

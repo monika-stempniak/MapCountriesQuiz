@@ -10,6 +10,7 @@ type userAnswersType = {
 
 type countriesType = {
   GET: string,
+  ERROR: string,
 };
 
 export const USER_NAME: userDataType = {
@@ -22,4 +23,5 @@ export const USER_ANSWERS: userAnswersType = {
 
 export const FETCH_COUNTRIES: countriesType = {
   GET: "FETCH_COUNTRIES:GET",
+  ERROR: "FETCH_COUNTRIES:ERROR",
 };

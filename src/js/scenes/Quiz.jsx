@@ -3,12 +3,13 @@ import * as React from "react";
 import Map from "./Map";
 import Topbar from "./Topbar";
 import countries from "../helpers/countries";
+import Snackbar from "../components/Snackbar";
+
+type Props = {};
 
 type State = {
   userAnswer: string,
 };
-
-type Props = {};
 
 class Quiz extends React.Component<Props, State> {
   state = {
@@ -28,6 +29,7 @@ class Quiz extends React.Component<Props, State> {
       <div className="quiz">
         <Topbar answer={userAnswer} />
         <Map clickMap={this.handleClick} countries={countries} />
+        <Snackbar />
       </div>
     );
   }

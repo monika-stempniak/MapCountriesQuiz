@@ -1,0 +1,57 @@
+.snackbar {
+  max-width: 300px;
+  width: 100%;
+  padding: 10px;
+  margin: 10px;
+  position: absolute;
+  bottom: -100px;
+  right: 0;
+  transition: 1s;
+
+  &--success {
+    background: $color-good;
+    background: rgba($color-good, 0.8);
+    animation: showSnackbar 5s ease-in-out;
+  }
+
+  &--failure {
+    background: $color-bad;
+    background: rgba($color-bad, 0.8);
+    animation: showSnackbar 5s ease-in-out;
+  }
+
+  &--close {
+    animation: closeSnackbar 1s ease-in-out;
+  }
+
+  &__close-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+@keyframes showSnackbar {
+  20% {
+    bottom: 100px;
+  }
+  80% {
+    bottom: 100px;
+  }
+  100% {
+    bottom: -100px;
+  }
+}
+
+@keyframes closeSnackbar {
+  0% {
+    bottom: 100px;
+  }
+  100% {
+    bottom: -100px;
+  }
+}
