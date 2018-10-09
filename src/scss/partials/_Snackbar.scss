@@ -15,8 +15,8 @@
   }
 
   &--failure {
-    background: $color-bad;
-    background: rgba($color-bad, 0.8);
+    background: $color-wrong;
+    background: rgba($color-wrong, 0.8);
     animation: showSnackbar 5s ease-in-out;
   }
 
