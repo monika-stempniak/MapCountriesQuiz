@@ -2,10 +2,10 @@ $color-marine: #233e55;
 $color-light-gray: #eee;
 $color-mustard: #dcce06;
 $color-good: #90aa0d;
-$color-bad: #e34141;
+$color-wrong: #e34141;
 $color-gray: #ccc;
 
-$scores: good, bad;
+$scores: good, wrong;
 
 @mixin flexbox($justify-content, $align-items) {
   display: flex;
@@ -21,7 +21,7 @@ $scores: good, bad;
       }
     } @else {
       .#{$selector}--#{$score} {
-        color: $color-bad;
+        color: $color-wrong;
       }
     }
   }
@@ -32,7 +32,7 @@ $scores: good, bad;
   border-radius: 10px;
   border: none;
   background-color: $color-mustard;
-  font-size: 1.3rem;
+  font-size: 1rem;
   text-transform: uppercase;
   font-family: "Black Ops One", cursive;
   outline: none;
@@ -47,5 +47,5 @@ $scores: good, bad;
 
 %section-header {
   margin: 10px 0;
-  font-size: 1.3rem;
+  font-size: 1rem;
 }

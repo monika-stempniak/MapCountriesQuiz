@@ -44,6 +44,7 @@
     "flow-coverage-report": "^0.5.0",
     "husky": "^0.14.3",
     "identity-obj-proxy": "^3.0.0",
+    "image-webpack-loader": "^4.3.1",
     "jest": "^23.4.2",
     "node-sass": "^4.8.1",
     "postcss-loader": "^2.1.0",

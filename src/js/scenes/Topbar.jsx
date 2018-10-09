@@ -19,7 +19,7 @@ type State = {
     capital: string,
   },
   goodAnswer: number,
-  badAnswer: number,
+  wrongAnswer: number,
   isStartClicked: boolean,
   isHintLinkVisible: boolean,
   isHintVisible: boolean,
@@ -58,7 +58,7 @@ class Topbar extends React.Component<Props, State> {
       capital: "",
     },
     goodAnswer: 0,
-    badAnswer: 0,
+    wrongAnswer: 0,
     isStartClicked: false,
     isHintLinkVisible: false,
     isHintVisible: false,
@@ -85,7 +85,7 @@ class Topbar extends React.Component<Props, State> {
         capital: "",
       },
       goodAnswer: 0,
-      badAnswer: 0,
+      wrongAnswer: 0,
       isStartClicked: false,
       isHintLinkVisible: false,
       isHintVisible: false,
@@ -180,7 +180,7 @@ class Topbar extends React.Component<Props, State> {
   };
 
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    const { isStartClicked, goodAnswer, badAnswer, countries } = this.state;
+    const { isStartClicked, goodAnswer, wrongAnswer, countries } = this.state;
     const { answer } = this.props;
     if (nextProps.countries) {
       this.setState({
@@ -203,7 +203,7 @@ class Topbar extends React.Component<Props, State> {
         this.props.addUserAnswers({ code, answer: true });
       } else {
         this.setState({
-          badAnswer: badAnswer + 1,
+          wrongAnswer: wrongAnswer + 1,
         });
         this.props.addUserAnswers({ code, answer: false });
       }
@@ -218,7 +218,7 @@ class Topbar extends React.Component<Props, State> {
       hintMessage,
       isStartClicked,
       goodAnswer,
-      badAnswer,
+      wrongAnswer,
       isStartDisable,
     } = this.state;
 
@@ -278,8 +278,8 @@ class Topbar extends React.Component<Props, State> {
                     <th scope="col" className="topbar__table--good">
                       Good
                     </th>
-                    <th scope="col" className="topbar__table--bad">
-                      Bad
+                    <th scope="col" className="topbar__table--wrong">
+                      Wrong
                     </th>
                   </tr>
                 </thead>
@@ -293,7 +293,7 @@ class Topbar extends React.Component<Props, State> {
                     </td>
                     <td>{`${countries.length}/3`}</td>
                     <td className="topbar__table--good">{goodAnswer}</td>
-                    <td className="topbar__table--bad">{badAnswer}</td>
+                    <td className="topbar__table--wrong">{wrongAnswer}</td>
                   </tr>
                 </tbody>
               </table>

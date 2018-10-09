@@ -15,19 +15,19 @@ const Scores = (props: Props) => {
   const answer = () => {
     let a;
     if (userAnswer === "") a = "-";
-    else if (userAnswer === false) a = "false";
-    else a = "true";
+    else if (userAnswer === false) a = "wrong";
+    else a = "good";
     return a;
   };
 
   const classAnswer = () => {
     let classEnding;
     switch (answer()) {
-      case "true":
+      case "good":
         classEnding = "good";
         break;
-      case "false":
-        classEnding = "bad";
+      case "wrong":
+        classEnding = "wrong";
         break;
       default:
         classEnding = "no-answer";

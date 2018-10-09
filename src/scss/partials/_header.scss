@@ -1,4 +1,6 @@
 .header {
+  @include flexbox(center, center);
+
   &__wrapper {
     width: 100%;
     min-height: 20%;
@@ -14,4 +16,8 @@
     color: $color-marine;
     letter-spacing: 3px;
   }
+}
+
+.logo {
+  margin-right: 12px;
 }
