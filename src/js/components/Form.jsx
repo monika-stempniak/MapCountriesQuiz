@@ -3,6 +3,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Button from "./Button";
+import InputField from "./InputField";
 import { addUserName } from "../actions/userDataAction";
 
 type State = {
@@ -96,8 +97,6 @@ class Home extends React.Component<Props, State> {
       errors.regionError = "Region needs to be chosen";
     }
 
-    console.log(errors);
-
     this.setState(prevState => ({
       ...prevState,
       ...errors,
@@ -137,8 +136,6 @@ class Home extends React.Component<Props, State> {
         isCheckedError: "",
       });
     }
-
-    console.log(this.state);
   };
 
   selectRegion = () => {
@@ -181,73 +178,66 @@ class Home extends React.Component<Props, State> {
       <dir className="container">
         <form onSubmit={this.handleSubmit} className="form">
           <div className="form__container">
-            <label htmlFor="username" className="form__label">
-              <input
-                type="text"
-                id="username"
-                className="form__input"
-                name="username"
-                onChange={this.handleChange}
-                onBlur={this.handleBlur}
-                value={username}
-                placeholder="Username"
-              />
-            </label>
+            <InputField
+              labelClass="form__label"
+              inputId="username"
+              inputName="username"
+              inputClass="form__input"
+              handleInputChange={e => this.handleChange(e)}
+              handleInputBlur={this.handleBlur}
+              inputValue={username}
+              inputPlaceholder="Username"
+            />
             <p className="form__error">{usernameError}</p>
-            <label htmlFor="email" className="form__label">
-              <input
-                type="text"
-                id="email"
-                className="form__input"
-                name="email"
-                onChange={this.handleChange}
-                onBlur={this.handleBlur}
-                value={email}
-                placeholder="Email"
-              />
-            </label>
+            <InputField
+              labelClass="form__label"
+              inputId="email"
+              inputName="email"
+              inputClass="form__input"
+              handleInputChange={e => this.handleChange(e)}
+              handleInputBlur={this.handleBlur}
+              inputValue={email}
+              inputPlaceholder="Email"
+            />
             <p className="form__error">{emailError}</p>
             <fieldset className="form__label">
               <legend>Choose gender</legend>
-              <label htmlFor="female" className="form__label-radio">
-                <input
-                  type="radio"
-                  id="female"
-                  name="gender"
-                  className="form__radio"
-                  onChange={this.handleChange}
-                  onBlur={this.handleBlur}
-                  value="female"
-                  checked={gender === "female"}
-                />
-                Female
-              </label>
-              <label htmlFor="male" className="form__label-radio">
-                <input
-                  type="radio"
-                  id="male"
-                  name="gender"
-                  className="form__radio"
-                  onChange={this.handleChange}
-                  onBlur={this.handleBlur}
-                  value="male"
-                  checked={gender === "male"}
-                />
-                Male
-              </label>
+              <InputField
+                labelClass="form__label-radio"
+                inputId="female"
+                inputType="radio"
+                inputName="gender"
+                inputClass="form__radio"
+                handleInputChange={e => this.handleChange(e)}
+                handleInputBlur={this.handleBlur}
+                inputValue="female"
+                isChecked={gender === "female"}
+                inputText="Female"
+              />
+              <InputField
+                labelClass="form__label-radio"
+                inputId="male"
+                inputType="radio"
+                inputName="gender"
+                inputClass="form__radio"
+                handleInputChange={e => this.handleChange(e)}
+                handleInputBlur={this.handleBlur}
+                inputValue="male"
+                isChecked={gender === "male"}
+                inputText="Male"
+              />
             </fieldset>
             <p className="form__error">{genderError}</p>
-            <label htmlFor="rodo" className="form__label form__label-checkbox">
-              <input
-                type="checkbox"
-                id="rodo"
-                className="form__checkbox"
-                onChange={this.toggleChange}
-                onBlur={this.handleBlur}
-                checked={isChecked}
-              />
-              I agree with RODO policy
-            </label>
+            <InputField
+              labelClass="form__label form__label-checkbox"
+              inputId="rodo"
+              inputType="checkbox"
+              inputClass="form__checkbox"
+              handleInputChange={this.toggleChange}
+              handleInputBlur={this.handleBlur}
+              isChecked={isChecked}
+              inputText="I agree with RODO policy"
+            />
             <p className="form__error">{isCheckedError}</p>
             <label htmlFor="regions" className="form__label">
               <select
