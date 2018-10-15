@@ -26,7 +26,7 @@ type Props = {
     type: string,
     payload: string,
   },
-  // history: Array<string>,
+  history: Array<string>,
 };
 
 class Home extends React.Component<Props, State> {
@@ -106,21 +106,22 @@ class Home extends React.Component<Props, State> {
     return isError;
   };
 
+  handleBlur = () => {
+    this.validateForm();
+  };
+
   handleSubmit = (e: SyntheticMouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     const { username } = this.state;
-    const {
-      addUserName,
-      // history
-    } = this.props;
+    const { addUserName, history } = this.props;
 
     const err = this.validateForm();
 
     if (!err) {
       addUserName(username);
 
-      // history.push("/quiz");
+      history.push("/quiz");
 
       this.setState({
         username: "",
@@ -187,6 +188,7 @@ class Home extends React.Component<Props, State> {
                 className="form__input"
                 name="username"
                 onChange={this.handleChange}
+                onBlur={this.handleBlur}
                 value={username}
                 placeholder="Username"
               />
@@ -199,6 +201,7 @@ class Home extends React.Component<Props, State> {
                 className="form__input"
                 name="email"
                 onChange={this.handleChange}
+                onBlur={this.handleBlur}
                 value={email}
                 placeholder="Email"
               />
@@ -213,6 +216,7 @@ class Home extends React.Component<Props, State> {
                   name="gender"
                   className="form__radio"
                   onChange={this.handleChange}
+                  onBlur={this.handleBlur}
                   value="female"
                   checked={gender === "female"}
                 />
@@ -225,6 +229,7 @@ class Home extends React.Component<Props, State> {
                   name="gender"
                   className="form__radio"
                   onChange={this.handleChange}
+                  onBlur={this.handleBlur}
                   value="male"
                   checked={gender === "male"}
                 />
@@ -238,6 +243,7 @@ class Home extends React.Component<Props, State> {
                 id="rodo"
                 className="form__checkbox"
                 onChange={this.toggleChange}
+                onBlur={this.handleBlur}
                 checked={isChecked}
               />
               I agree with RODO policy
@@ -250,6 +256,7 @@ class Home extends React.Component<Props, State> {
                 className="form__input"
                 value={region}
                 onChange={this.handleChange}
+                onBlur={this.handleBlur}
               >
                 <option value="" disabled hidden>
                   Choose region
