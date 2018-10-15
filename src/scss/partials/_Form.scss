@@ -13,7 +13,7 @@
   }
 
   &__label {
-    margin-bottom: 20px;
+    margin: 10px 0 5px;
     width: 100%;
   }
 
@@ -40,6 +40,17 @@
 
   &__radio {
     margin-left: 10px;
+  }
+
+  &__error {
+    height: 15px;
+    color: $color-wrong;
+    align-self: flex-start;
+    font-size: 10px;
+
+    &:last-of-type {
+      margin-bottom: 20px;
+    }
   }
 }
 

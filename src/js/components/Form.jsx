@@ -6,12 +6,17 @@ import Button from "./Button";
 import { addUserName } from "../actions/userDataAction";
 
 type State = {
-  name: string,
+  username: string,
   email: string,
   gender: string,
   region: string,
   isChecked: boolean,
   isDisabled: boolean,
+  usernameError: string,
+  emailError: string,
+  genderError: string,
+  regionError: string,
+  isCheckedError: string,
 };
 
 type Props = {
@@ -21,43 +26,118 @@ type Props = {
     type: string,
     payload: string,
   },
-  history: Array<string>,
+  // history: Array<string>,
 };
 
 class Home extends React.Component<Props, State> {
   state = {
-    name: "",
+    username: "",
     email: "",
     gender: "",
     region: "",
     isChecked: false,
     isDisabled: true,
+    usernameError: "",
+    emailError: "",
+    genderError: "",
+    regionError: "",
+    isCheckedError: "",
   };
 
   handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     (e.target: HTMLInputElement);
     this.setState({
       [e.target.name]: e.target.value,
+      isDisabled: false,
     });
   };
 
   toggleChange = () => {
     this.setState(prevState => ({
       isChecked: !prevState.isChecked,
+      isDisabled: false,
     }));
+  };
+
+  validateForm = () => {
+    const { username, email, gender, region, isChecked } = this.state;
+
+    let isError = false;
+    const errors = {
+      usernameError: "",
+      emailError: "",
+      genderError: "",
+      regionError: "",
+      isCheckedError: "",
+    };
+
+    if (username.length < 3) {
+      isError = true;
+      errors.usernameError = "Username needs to be at least 3 characters long";
+    }
+
+    if (email.indexOf("@") === -1) {
+      isError = true;
+      errors.emailError = "Required valid email";
+    }
+
+    if (gender === "") {
+      isError = true;
+      errors.genderError = "Gender needs to be chosen";
+    }
+
+    if (!isChecked) {
+      isError = true;
+      errors.isCheckedError = "Policy needs to be checked";
+    }
+
+    if (region === "") {
+      isError = true;
+      errors.regionError = "Region needs to be chosen";
+    }
+
+    console.log(errors);
+
+    this.setState(prevState => ({
+      ...prevState,
+      ...errors,
+    }));
+
+    return isError;
   };
 
   handleSubmit = (e: SyntheticMouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const { name } = this.state;
-    const { addUserName, history } = this.props;
+    const { username } = this.state;
+    const {
+      addUserName,
+      // history
+    } = this.props;
+
+    const err = this.validateForm();
+
+    if (!err) {
+      addUserName(username);
+
+      // history.push("/quiz");
+
+      this.setState({
+        username: "",
+        email: "",
+        gender: "",
+        region: "",
+        isChecked: false,
+        isDisabled: true,
+        usernameError: "",
+        emailError: "",
+        genderError: "",
+        regionError: "",
+        isCheckedError: "",
+      });
+    }
 
     console.log(this.state);
-
-    addUserName(name);
-
-    history.push("/quiz");
   };
 
   selectRegion = () => {
@@ -80,7 +160,19 @@ class Home extends React.Component<Props, State> {
   };
 
   render() {
-    const { name, email, gender, region, isChecked, isDisabled } = this.state;
+    const {
+      username,
+      email,
+      gender,
+      region,
+      isChecked,
+      isDisabled,
+      usernameError,
+      emailError,
+      genderError,
+      regionError,
+      isCheckedError,
+    } = this.state;
 
     const disabledClass = isDisabled ? "btn-disabled" : "";
 
@@ -88,17 +180,18 @@ class Home extends React.Component<Props, State> {
       <dir className="container">
         <form onSubmit={this.handleSubmit} className="form">
           <div className="form__container">
-            <label htmlFor="name" className="form__label">
+            <label htmlFor="username" className="form__label">
               <input
                 type="text"
-                id="name"
+                id="username"
                 className="form__input"
-                name="name"
+                name="username"
                 onChange={this.handleChange}
-                value={name}
-                placeholder="User name"
+                value={username}
+                placeholder="Username"
               />
             </label>
+            <p className="form__error">{usernameError}</p>
             <label htmlFor="email" className="form__label">
               <input
                 type="text"
@@ -110,6 +203,7 @@ class Home extends React.Component<Props, State> {
                 placeholder="Email"
               />
             </label>
+            <p className="form__error">{emailError}</p>
             <fieldset className="form__label">
               <legend>Choose gender</legend>
               <label htmlFor="female" className="form__label-radio">
@@ -137,6 +231,7 @@ class Home extends React.Component<Props, State> {
                 Male
               </label>
             </fieldset>
+            <p className="form__error">{genderError}</p>
             <label htmlFor="rodo" className="form__label form__label-checkbox">
               <input
                 type="checkbox"
@@ -147,6 +242,7 @@ class Home extends React.Component<Props, State> {
               />
               I agree with RODO policy
             </label>
+            <p className="form__error">{isCheckedError}</p>
             <label htmlFor="regions" className="form__label">
               <select
                 id="regions"
@@ -161,6 +257,7 @@ class Home extends React.Component<Props, State> {
                 {this.selectRegion()}
               </select>
             </label>
+            <p className="form__error">{regionError}</p>
             <Button
               htmlType="submit"
               btnClass={`btn btn-submit ${disabledClass}`}
