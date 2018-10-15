@@ -35,5 +35,15 @@ module.exports = {
     "import/prefer-default-export": "off",
     "react/destructuring-assignment": "off",
     "no-debugger": "off",
+    "jsx-a11y/label-has-for": [
+      2,
+      {
+        components: ["Label"],
+        required: {
+          some: ["nesting", "id"],
+        },
+        allowChildren: false,
+      },
+    ],
   },
 };
