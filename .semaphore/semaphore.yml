@@ -1,5 +1,5 @@
 version: v1.0
-name: MapCountries Quiz
+name: MapCountriesQuiz
 agent:
   machine:
     type: e1-standard-2
@@ -16,7 +16,7 @@ blocks:
             - npm install
             - cache store node-modules-$(checksum package-lock.json) node_modules
 
-  - name: Lint, format & unit tests"
+  - name: Lint, format & unit tests
     task:
       prologue:
         commands:
