@@ -1,63 +1,36 @@
 version: v1.0
-name: First pipeline example
+name: MapCountriesQuiz
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 
 blocks:
-  - name: "Build"
-    task:
-      env_vars:
-        - name: APP_ENV
-          value: prod
-      jobs:
-        - name: Docker build
-          commands:
-            - checkout
-            - ls -1
-            - echo $APP_ENV
-            - echo "Docker build..."
-            - echo "done"
-
-  - name: "Smoke tests"
+  - name: Install dependencies
     task:
       jobs:
-        - name: Smoke
+        - name: npm install and cache
           commands:
             - checkout
-            - echo "make smoke"
+            - cache restore node-modules-$(checksum package-lock.json)
+            - npm install
+            - cache store node-modules-$(checksum package-lock.json) node_modules
 
-  - name: "Unit tests"
+  - name: Lint, format & unit tests
     task:
+      prologue:
+        commands:
+          - checkout
+          - cache restore node-modules-$(checksum package-lock.json)
+          - npm install
+          - cache store node-modules-$(checksum package-lock.json) node_modules
       jobs:
-        - name: RSpec
+        - name: Lint
           commands:
-            - checkout
-            - echo "make rspec"
-
-        - name: Lint code
+            - npm run lint:style
+        - name: Format
           commands:
-            - checkout
-            - echo "make lint"
-
-        - name: Check security
+            - npm run format:prettier
+        - name: Tests
           commands:
-            - checkout
-            - echo "make security"
-
-  - name: "Integration tests"
-    task:
-      jobs:
-        - name: Cucumber
-          commands:
-            - checkout
-            - echo "make cucumber"
-
-  - name: "Push Image"
-    task:
-      jobs:
-        - name: Push
-          commands:
-            - checkout
-            - echo "make docker.push"
+            - npm run test
